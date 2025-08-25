@@ -1,2 +1,6 @@
+#Ignora archivos de metadatos del finder de Mac
 .DS_Store
 
+
+# Ignora los archivos de ejecución de python
+__pycache__
