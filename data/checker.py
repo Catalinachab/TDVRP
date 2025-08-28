@@ -58,25 +58,25 @@ def best_known_solution(dataset_name, instance_name):
 
 # Returns: the travel time of arc (i, j) if departing at t0.
 def travel_time(instance, i, j, t0):
-    c = instance["clusters"][i][j]
-    T = instance["speed_zones"]
-    v = instance["cluster_speeds"]
+	c = instance["clusters"][i][j]
+	T = instance["speed_zones"]
+	v = instance["cluster_speeds"]
 
-    # Find speed slot T_k that includes t0.
-    k = min(i for i in range(0,len(T)) if t0 >= T[i][0] and t0 <= T[i][1])
+	# Find speed slot T_k that includes t0.
+	k = min(i for i in range(0,len(T)) if t0 >= T[i][0] and t0 <= T[i][1])
 
-    # Travel time algorithm from Ichoua et al.
-    t = t0
-    d = instance["distances"][i][j]
-    tt = t + d / v[c][k]
-    while tt > T[k][1]:
-        d = d - v[c][k] * (T[k][1] - t)
-        t = T[k][1]
-        if epsilon_equal(d, 0): break
-        if epsilon_bigger(d, 0) and k+1 == len(T): return INFTY
-        tt = t + d / v[c][k+1]
-        k = k + 1
-    return tt - t0
+	# Travel time algorithm from Ichoua et al.
+	t = t0
+	d = instance["distances"][i][j]
+	tt = t + d / v[c][k]
+	while tt > T[k][1]:
+		d = d - v[c][k] * (T[k][1] - t)
+		t = T[k][1]
+		if epsilon_equal(d, 0): break
+		if epsilon_bigger(d, 0) and k+1 == len(T): return INFTY
+		tt = t + d / v[c][k+1]
+		k = k + 1
+	return tt - t0
 
 # Returns: the time when the path finishes if departing at t0.
 # If the route is infeasible it returns INFTY.

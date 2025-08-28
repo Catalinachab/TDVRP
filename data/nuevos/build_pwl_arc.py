@@ -44,27 +44,45 @@ def tau_pts(D, VZ, Zs, per):
     if abs(B[-1] - per) > 1e-9: B.append(per)
     return [(x, fwd(D, x, VZ, Zs, per)) for x in B]
 
+import json, csv, os
+
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("instance")          # ruta instancia .json
-    ap.add_argument("arc")               # "i-j"
-    ap.add_argument("--out", default="arc_pwl.json")
-    ap.add_argument("--csv")
-    args = ap.parse_args()
+    index_path = 'data/instancias-dabia_et_al_2013/index.json'
+    with open(index_path) as f:
+        instances = json.load(f)   # esto es una lista de diccionarios
+        
+    # ! Cómo iterar sobre los arcos??? Qué arcos hay que mirar para comparar?
+    arc = "7_12"
+    i, j = map(int, arc.split("_"))
 
-    I = json.load(open(args.instance))
-    i, j = map(int, args.arc.split("-"))
-    D = I["distances"][i][j]
-    cid = I["clusters"][i][j]
-    VZ = I["cluster_speeds"][cid]
-    Zs = Z(I); per = P(I)
+    for inst in instances:
+        instance_name = inst["file_name"]
+        instance_path = "data/instancias-dabia_et_al_2013/" + instance_name
 
-    pts = tau_pts(D, VZ, Zs, per)
-    json.dump({"period": per, "arc": f"{i}-{j}", "points": pts}, open(args.out, "w"), indent=2)
-    if args.csv:
-        w = csv.writer(open(args.csv, "w", newline=""))
-        w.writerow(["x_depart", "tau_duration"])
-        w.writerows(pts)
+        out_path = f"data/outputs/{instance_name}_arc_{arc}.json"
+        csv_path = f"data/outputs/{instance_name}_arc_{arc}.csv"
+
+        # Cargar instancia
+        I = json.load(open(instance_path))
+        D = I["distances"][i][j]
+        cid = I["clusters"][i][j]
+        VZ = I["cluster_speeds"][cid]
+        Zs = Z(I); per = P(I)
+
+        # Calcular puntos
+        pts = tau_pts(D, VZ, Zs, per)
+
+        # Asegurar carpeta outputs
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+        # Guardar resultados
+        with open(out_path, "w") as f_json:
+            json.dump({"period": per, "arc": f"{i}-{j}", "points": pts}, f_json, indent=2)
+
+        with open(csv_path, "w", newline="") as f_csv:
+            w = csv.writer(f_csv)
+            w.writerow(["x_depart", "tau_duration"])
+            w.writerows(pts)
 
 if __name__ == "__main__":
-    main()
+    main()  
