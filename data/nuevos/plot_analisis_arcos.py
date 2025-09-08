@@ -17,7 +17,8 @@ df = pd.read_csv(data_path)
     # - ¿Existen clusters de arcos preferibles? que tengan menores duraciones de viaje; o menores pendientes en el punto mínimo (slope_min), o sea que no varíen tanto según el instante de salida 
 df[["tau_min", "tau_max", "tau_mean"]].hist(bins=30, figsize=(12, 4))
 plt.suptitle("Distribución de tau_min, tau_max, tau_mean")
-plt.show()
+# guardo la figura
+plt.savefig("data/outputs/histograma_tau.png")
 
 #? 2. Scatter: distancia vs tau_min
 # que patrones buscar?
@@ -26,12 +27,12 @@ plt.show()
         # - ¿Hay clusters con velocidades similares que se comportan de manera diferente?
     # - ¿Hay arcos con pendiente muy alta en el punto mínimo (slope_min)? es decir, que varíen mucho según el instante de salida
 df.plot.scatter(x="distancia", y="tau_min", alpha=0.5, title="Distancia vs tau_min")
-plt.show()
+plt.savefig("data/outputs/scatter_distancia_tau_min.png")
 
 #? 3. Scatter: distancia vs tau_mean
     # - similar a los de distancia vs tau_min pero con la media se suavizan los outliers
 df.plot.scatter(x="distancia", y="tau_mean", alpha=0.5, title="Distancia vs tau_mean")
-plt.show()
+plt.savefig("data/outputs/scatter_distancia_tau_mean.png")
 
 #? 4. Boxplot de tau_min por cluster
     # - ¿Hay clusters que consistentemente tienen menores tau_min? que características tienen esos clusters? puedo usar esto para elegir clusters preferibles y evitar otros
@@ -42,7 +43,7 @@ if "cluster" in df.columns:
     plt.suptitle("")
     plt.xlabel("cluster")
     plt.ylabel("tau_min")
-    plt.show()
+    plt.savefig("data/outputs/boxplot_tau_min_cluster.png")
 
 #? 5. Scatter: tau_min vs tau_max
     # - ¿Hay alguna relación entre tau_min y tau_max? intuitivamente debería haber una correlación positiva, es decir, a mayor tau_min, mayor tau_max 
@@ -50,6 +51,6 @@ plt.scatter(df["tau_min"], df["tau_max"], alpha=0.5)
 plt.xlabel("tau_min")
 plt.ylabel("tau_max")
 plt.title("tau_min vs tau_max")
-plt.show()
+plt.savefig("data/outputs/scatter_tau_min_tau_max.png")
 
 print("Listo. Observa los gráficos para buscar patrones visuales.")
