@@ -22,21 +22,21 @@ def pwl_f(t:float, i:int, j:int, instance_name:str) -> tuple:
          y = m * t + ord_origen
          return y 
 
-
-def main():
+def simulacion(path):
 
    epsilon = 0.1
-   path = 'data/instancias-dabia_et_al_2013/solutions.json'
    with open(path) as f:
       solutions = json.load(f)
    
    for s in solutions:
       instance_name = s["instance_name"]
-      # entrar a la instancia para extraer la ventana de tiempo
       instance = "data/instancias-dabia_et_al_2013/" + instance_name + ".json"
+      # entrar a la instancia para extraer la ventana de tiempo
       I = json.load(open(instance))
       TW = I["time_windows"]
       idx = 0
+      res:dict = {} # clave: instance_name, valor: (num de ruta, time_departures de esa ruta)
+      res[instance_name]=[]
       for route in s["routes"]:
          t0 = route["t0"]
          path = route["path"]
@@ -53,6 +53,7 @@ def main():
             t_i+=y
             i+=1
          # si nos acercamos a la duracion total de la solucion, estamos bien. 
+         res[instance_name] = res[instance_name].append((idx, time_departures)) 
          if abs(duration - (t_i - t0)) <= epsilon: 
             print("por ahora funciona. ", instance_name," ruta numero: ", idx)
          else: 
@@ -60,6 +61,9 @@ def main():
             print("no funcionó. ", instance_name," ruta numero: ", idx, "duración ruta nuestra: ", duracion_nuestra, "duración posta: ", duration)
          idx+=1
          # calcular t1 = t0 + duracion arco (t0, client) si esta dentro de la ventana de tiempo
+      
+   return res
 
 if __name__ == "__main__":
-   main()  
+   path = 'data/instancias-dabia_et_al_2013/solutions.json'
+   simulacion(path)  
