@@ -22,13 +22,12 @@ def pwl_f(t:float, i:int, j:int, instance_name:str) -> tuple:
          y = m * t + ord_origen
          return y 
 
-def simulacion(path, instance_name):
+def simulacion(solution, instance_name):
     '''
     devuelve el time_departures para cada ruta de esa instancia particular
     '''
     epsilon = 0.1
-    with open(path) as f:
-        solutions = json.load(f)
+   
    
     instance = "data/instancias-dabia_et_al_2013/" + instance_name + ".json"
     # entrar a la instancia para extraer la ventana de tiempo
@@ -38,7 +37,7 @@ def simulacion(path, instance_name):
 
     res = []
 
-    for route in solutions["routes"]:
+    for route in solution["routes"]:
         t0 = route["t0"]
         path = route["path"]
         duration = route["duration"]
