@@ -118,15 +118,15 @@ def simulacion(solution, instance):
     return res
 
 if __name__ == "__main__":
-    path_s = "TDVRP\data\instancias-dabia_et_al_2013\solutions.json"
+    path_s = "data\instancias-dabia_et_al_2013\solutions.json"
     solutions = json.load(open(path_s))
-    instance_name = "R102_100"
+    instance_name = "C104_100"
 
     for s in solutions:
         if s["instance_name"] == instance_name:
             solution = s
             break
 
-    path_i = f"TDVRP\data\instancias-dabia_et_al_2013\{instance_name}.json"
+    path_i = f"data\instancias-dabia_et_al_2013\{instance_name}.json"
     instance = json.load(open(path_i))
     simulacion(solution, instance)  
