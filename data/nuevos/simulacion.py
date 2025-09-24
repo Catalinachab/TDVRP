@@ -78,12 +78,14 @@ def simulacion(solution, instance):
         i = 0
         while i < (len(path)-1):
             time_window = TW[path[i]] #ventana de tiempo del cliente i 
+            service_time = ST[path[i]] # tiempo de servicio en el cliente i
 
-            if time_window[0] > t_i: # si t_i esta fuera de la ventana de tiempo, hay que esperar => sumar la espera
-                t_i+=(time_window[0] - t_i)
-            
-            # dur_viaje = pwl_f(t_i, path[i], path[i+1], instance)
-            dur_viaje = travel_time(I, path[i], path[i+1], t_i)
+            # if time_window[0] > t_i: # si t_i esta fuera de la ventana de tiempo, hay que esperar => sumar la espera
+            #     t_i+=(time_window[0] - t_i)
+            t_i = max(t_i, time_window[0]) + service_time # si llego antes de la ventana, espero hasta que abra + el tiempo de servicio
+
+            dur_viaje = pwl_f(t_i, path[i], path[i+1], instance)
+            # dur_viaje = travel_time(I, path[i], path[i+1], t_i)
             
 
             time_departures.append([path[i], path[i+1], t_i,dur_viaje])
@@ -91,8 +93,7 @@ def simulacion(solution, instance):
             ###########
             #todo: NO TENIAMOS EN CUENTA EL TIEMPO QUE TARDA EN ATENDER/SERVIR AL CLIENTE (ej. en descargar el combustible a la estacion de servicio)
             # en las instancias: cada valor en "service_times" corresponde a un nodo (cliente) del problema
-            service_time = ST[path[i]] # tiempo de servicio en el cliente i
-            t_i+=dur_viaje+service_time # todo: al t actual le sumo el tiempo de viaje + el tiempo de servicio en el cliente i
+            t_i += dur_viaje # + service_time # todo: al t actual le sumo el tiempo de viaje + el tiempo de servicio en el cliente i
             ###########
             i+=1
 
@@ -120,7 +121,7 @@ def simulacion(solution, instance):
 if __name__ == "__main__":
     path_s = "data\instancias-dabia_et_al_2013\solutions.json"
     solutions = json.load(open(path_s))
-    instance_name = "C104_100"
+    instance_name = "RC205_100"
 
     for s in solutions:
         if s["instance_name"] == instance_name:
