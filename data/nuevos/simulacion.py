@@ -1,7 +1,7 @@
 import json, math, argparse, csv
 from build_pwl_arc import *
 
-def pwl_f(t:float, i:int, j:int, instance:dict) -> tuple:
+def pwl_f(t: float, i: int, j: int, instance: dict) -> float:
     '''
     devuelve (t, y) donde y es el tiempo de viaje en el arco (i,j) si se sale en t
     '''
@@ -14,14 +14,19 @@ def pwl_f(t:float, i:int, j:int, instance:dict) -> tuple:
     D = I["distances"][i][j]
     cid = I["clusters"][i][j]
     VZ = I["cluster_speeds"][cid]
-    Zs = Z(I); per = P(I)
+    Zs = Z(I)
+    per = P(I)
     pts = tau_pts(D, VZ, Zs, per)
-    for i in range(len(pts)-1):
-        if t >= pts[i][0] and t <= pts[i+1][0]:
-            m = (pts[i+1][1] - pts[i][1])/(pts[i+1][0] - pts[i][0]) #pendiente
-            ord_origen = pts[i][1] - (m * pts[i][0]) #ordenada al origen
+    
+    for k in range(len(pts)-1):  
+        if t >= pts[k][0] and t <= pts[k+1][0]:
+            m = (pts[k+1][1] - pts[k][1]) / (pts[k+1][0] - pts[k][0])
+            ord_origen = pts[k][1] - (m * pts[k][0])
             y = m * t + ord_origen
-            return y 
+            return y
+    
+    # Si t está fuera del rango, usar el último punto
+    return pts[-1][1]
 
 INFTY = 10e8; EPS = 10e-6
 def epsilon_equal(a, b): return abs(a - b) < EPS
@@ -119,15 +124,15 @@ def simulacion(solution, instance):
     return res
 
 if __name__ == "__main__":
-    path_s = "data\instancias-dabia_et_al_2013\solutions.json"
+    path_s = f"data/nuevos/solutions.json"
     solutions = json.load(open(path_s))
-    instance_name = "RC205_100"
+    instance_name = "C108_25"
 
     for s in solutions:
         if s["instance_name"] == instance_name:
             solution = s
             break
 
-    path_i = f"data\instancias-dabia_et_al_2013\{instance_name}.json"
+    path_i = f"data/instancias-dabia_et_al_2013/{instance_name}.json"
     instance = json.load(open(path_i))
     simulacion(solution, instance)  

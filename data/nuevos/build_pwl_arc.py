@@ -8,12 +8,14 @@ def Z(I):
 
 def P(I):
     # periodo del horizonte o el final de la última zona si no hay horizonte
-        # per es longitud total del ciclo de tiempo considerado (por ejemplo, un día, una hora, etc.). o sea, rango de tiempo sobre el que se repiten las zonas de velocidad. si no hay horizonte, es el final de la última zona
+        # per es longitud total del ciclo de tiempo considerado (por ejemplo, un día, una hora, etc.). 
+        # o sea, rango de tiempo sobre el que se repiten las zonas de velocidad. si no hay horizonte, 
+        # es el final de la última zona
     return (I["horizon"][1] - I["horizon"][0]) if "horizon" in I else Z(I)[-1][1]
 
 def zid(t, Zs, per):
     # índice de la zona en que cae t
-    t = (t % per + per) % per # para asegurar que t está en [0, per)
+    # t = (t % per + per) % per # para asegurar que t está en [0, per)
     for i, (a, b) in enumerate(Zs):
         if a <= t < b: return i
     # si t == per, cae en la última zona
@@ -22,7 +24,9 @@ def zid(t, Zs, per):
 def fwd(D, x, VZ, Zs, per):  # tiempo exacto recorriendo zonas
     # tiempo total para recorrer distancia D, saliendo en x
     if D <= 0: return 0.0
-    t = (x % per + per) % per; rem = D; tot = 0.0
+    #t = (x % per + per) % per; 
+    t = x
+    rem = D; tot = 0.0
     for _ in range(len(Zs)*4 + 10): # para evitar bucles infinitos
         # i es la zona de velocidad en la que cae t; a,b los extremos de la zona; v la velocidad de la zona
         i = zid(t, Zs, per); a, b = Zs[i]; v = VZ[i]
@@ -40,7 +44,9 @@ def fwd(D, x, VZ, Zs, per):  # tiempo exacto recorriendo zonas
 def back(T, D, VZ, Zs, per):  # x tal que distancia(x->T)=D}
     '''
     instante x tal que yendo desde x se llega a T recorriendo distancia D. si no existe, devuelve NaN'''
-    t = (T % per + per) % per; rem = D
+    #t = (T % per + per) % per
+    t = T
+    rem = D
     for _ in range(len(Zs)*4 + 10):
         i = zid(t - 1e-12, Zs, per); a, b = Zs[i]; v = VZ[i]
         # span es el tiempo que se puede estar en esta zona antes de llegar a t; si t (instante) es mayor o igual al inicio de la zona, se puede estar todo el tiempo de la zona, si no, se puede estar el tiempo desde el inicio de la zona hasta el final del periodo y luego desde 0 hasta t
@@ -104,4 +110,4 @@ def main():
             w.writerows(pts)
 
 if __name__ == "__main__":
-    main()  
+    main()
