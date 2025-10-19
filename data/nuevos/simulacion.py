@@ -16,6 +16,13 @@ def pwl_f(t: float, i: int, j: int, instance: dict) -> float:
     VZ = I["cluster_speeds"][cid]
     Zs = Z(I)
     per = P(I)
+    Zs = Z(I)
+
+    #print(instance_name)
+    """ print("Última zona:", Zs[-1])
+    print("Periodo:", per)
+    print("Coincide fin de zona con per?:", abs(Zs[-1][1] - per) < 1e-6) """
+
     pts = tau_pts(D, VZ, Zs, per)
     
     for k in range(len(pts)-1):  
@@ -64,15 +71,12 @@ def simulacion(solution, instance):
     # I = json.load(open(instance))
 
     I = instance
-    
-    print(f"Instancia: {instance_name}")
-
     TW = I["time_windows"]
     ST = I["service_times"]
     idx_route = 0 
 
     res = []
-
+    mal = 0
     for route in solution["routes"]:
         t0 = route["t0"]
         path = route["path"]
@@ -107,27 +111,35 @@ def simulacion(solution, instance):
         duracion_nuestra = (t_i - t0)
         diferencia = duracion_nuestra - duration
         if abs(diferencia) <= epsilon:
-            print(
+            
+            """ print(
                 f"[funcionó] Ruta: {idx_route}"
                 f"  - Duración calculada: {(t_i - t0):.2f} | esperada:  {duration:.2f}"
-            )
+            ) """
         else: 
-            print(
+            mal+=1
+            
+            """ print(
                 f"[no funcionó] Ruta: {idx_route}    |   Diferencia de duración: {diferencia:.2f}\n"
                 f"  - Duración calculada: {(t_i - t0):.2f} | esperada:  {duration:.2f}"
-            )
+            ) """
         idx_route+=1
         # calcular t1 = t0 + duracion arco (t0, client) si esta dentro de la ventana de tiempo
         
         res.append(time_departures)
-
-    return res
+    error = 0
+    if mal >0: 
+         #print(f"Instancia: {instance_name} no funcionó")
+         error=1
+    return res, error
 
 if __name__ == "__main__":
+    
     path_s = f"data/nuevos/solutions.json"
     solutions = json.load(open(path_s))
-    instance_name = "C108_25"
-
+    """
+    instance_name = "C208_100"
+    
     for s in solutions:
         if s["instance_name"] == instance_name:
             solution = s
@@ -136,3 +148,18 @@ if __name__ == "__main__":
     path_i = f"data/instancias-dabia_et_al_2013/{instance_name}.json"
     instance = json.load(open(path_i))
     simulacion(solution, instance)  
+
+
+
+
+    soluciones_mal= 0
+    for s in solutions:
+        instance_name=  s["instance_name"] 
+        solution = s
+        path_i = f"data/instancias-dabia_et_al_2013/{instance_name}.json"
+        instance = json.load(open(path_i))
+        res, error = simulacion(solution, instance)
+        soluciones_mal+=error
+    print(f"de {len(solutions)} soluciones, fallaron {soluciones_mal} ")
+
+"""
