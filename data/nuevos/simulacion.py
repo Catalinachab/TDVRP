@@ -22,7 +22,7 @@ def pwl_f(t: float, i: int, j: int, instance: dict) -> float:
     """ print("Última zona:", Zs[-1])
     print("Periodo:", per)
     print("Coincide fin de zona con per?:", abs(Zs[-1][1] - per) < 1e-6) """
-
+    '''
     pts = tau_pts(D, VZ, Zs, per)
     
     for k in range(len(pts)-1):  
@@ -34,6 +34,8 @@ def pwl_f(t: float, i: int, j: int, instance: dict) -> float:
     
     # Si t está fuera del rango, usar el último punto
     return pts[-1][1]
+    '''
+    return fwd(D, t, VZ, Z, per)
 
 INFTY = 10e8; EPS = 10e-6
 def epsilon_equal(a, b): return abs(a - b) < EPS
