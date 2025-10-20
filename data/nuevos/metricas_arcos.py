@@ -101,50 +101,61 @@ def duracion_arcos(clusters_arcos:dict[tuple, list[tuple]], intervalos_ruta:list
     return res_dict
 
 
-def metricas(arcos_factibles:dict,duraciones:dict, time_departures, idx_ruta):
+def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta):
     '''
-    recibiria por intervalo todos los arcos factibles y calcula las duraciones de cada arco 
-    y busca segun la duracion el minimo y el maximo de los arcos 
-    y luego calcula duracion_optima/minimo y duracion_optima/maximo.
-
-    arcos_factibles: dict { intervalo_tuple: [(i,j), ...], ... }
-    duraciones: dict { intervalo_tuple: [ { "arc": (i,j), "durations": {"start":..,"mean":..,"minimo": .., "maximo:..,"end":..} }, ... ], ... }
+    Calcula ratios, clasifica más cerca del min/max (como antes)
+    y además devuelve las posiciones relativas (rels) para análisis por deciles.
     '''
     ruta = time_departures[idx_ruta]
-    res:List[List[Tuple]] = [] # en cada tupla el primer valor es la (duracion_optima / minimo ) y el segundo valor es la (duracion_optima / maximo) 
+    res: List[List[Tuple]] = []   # [(ratio_min, ratio_max)] por intervalo
+    res_str = []                  # texto descriptivo por intervalo
+    rels = []                     # lista plana de valores relativos (0–1)
 
-    res_str = []
     for idx, (intervalo, arcos) in enumerate(arcos_factibles.items()):
         res.append([])
         duracion_optima = ruta[idx][3]
-        minimo = float('inf')
-        maximo = 0.0
 
+        # juntar todos los valores posibles
+        todos_los_valores = []
         dur_entries = duraciones.get(intervalo, [])
         for entry in dur_entries:
-            val = entry.get("durations", {}).get("mean", 0.0)
-            if val != 0 and val > maximo:
-                maximo = val
-            if val != 0 and val < minimo:
-                minimo = val
+            durs = entry.get("durations", {})
+            todos_los_valores.extend([
+                durs.get("start", 0.0),
+                durs.get("mean", 0.0),
+                durs.get("minimo", 0.0),
+                durs.get("maximo", 0.0),
+                durs.get("end", 0.0),
+            ])
 
-        if minimo == float('inf'):
-            minimo = 0.0
+        valores_validos = [v for v in todos_los_valores if v and v > 0]
+
+        if valores_validos:
+            minimo = min(valores_validos)
+            maximo = max(valores_validos)
+        else:
+            minimo, maximo = 0.0, 0.0
 
         ratio_min = None if minimo == 0 else duracion_optima / minimo
         ratio_max = None if maximo == 0 else duracion_optima / maximo
-
         res[idx].append((ratio_min, ratio_max))
 
-        if maximo == minimo:
-            res_str.append("todas las duraciones son iguales")
+        # cálculo relativo para histograma
+        if maximo == minimo or (maximo == 0 and minimo == 0):
+            rel = None
+            res_str.append("todas las duraciones son iguales o nulas")
         else:
-            denom = (maximo - minimo)
-            # evitar división por cero (ya cubrimos caso maximo==minimo arriba)
-            rel = 0.0 if denom == 0 else (duracion_optima - minimo) / denom
+            rel = (duracion_optima - minimo) / (maximo - minimo)
+            rel = max(0, min(rel, 1))  # asegurar entre 0 y 1
             res_str.append("mas cerca del min" if rel < 0.5 else "mas cerca del max")
-    # res es a qué decil pertenece el optimo para cada intervalo??
-    return res, res_str
+
+        if rel is not None:
+            rels.append(rel)
+
+    # devuelvo TODO lo anterior + rels nuevos
+    return res, res_str, rels
+
+
     '''
     for i in range(len(arcos_factibles)): #recorres los intervalos
         res.append([])
@@ -195,8 +206,11 @@ def analizar_metricas_solutions(solutions_file, instancias_dir, output_file="met
                 intervalos_ruta.append(inter)
             arcos_utilizados = [(path[i], path[i+1]) for i in range(len(path)-1)]
             arcos_factibles = clusters_arcos_ruta(instance_name, intervalos_ruta, arcos_utilizados)
-            duracion_arcos_factibles = duracion_arcos(arcos_factibles, intervalos_ruta, instance_name)
-            metricas_res, metricas_str = metricas(arcos_factibles, duracion_arcos_factibles ,time_departures, idx_ruta)
+            #duracion_arcos_factibles = duracion_arcos(arcos_factibles, intervalos_ruta, instance_name)
+            epsilon = 0.1
+            cant_muestras = 5
+            duracion_arcos_factibles = duracion_arcos(arcos_factibles, intervalos_ruta, instance_name, epsilon, cant_muestras)
+            metricas_res, metricas_str, _ = metricas(arcos_factibles, duracion_arcos_factibles ,time_departures, idx_ruta)
             resultados.extend(metricas_str)
             cerca_min_ruta = metricas_str.count("mas cerca del min")
             cerca_max_ruta = metricas_str.count("mas cerca del max")
@@ -233,3 +247,87 @@ def analizar_metricas_solutions(solutions_file, instancias_dir, output_file="met
 analizar_metricas_solutions("data//instancias-dabia_et_al_2013/solutions.json", "data/instancias-dabia_et_al_2013", output_file="metricas_resultados.xlsx")
 
 
+# --------------------------------------------------------------------
+# 🔹 NUEVO BLOQUE: Distribución por deciles + gráficos por tipo
+# --------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+def analizar_distribucion_por_deciles(solutions_file, instancias_dir, output_file="metricas_distribucion.xlsx"):
+    """
+    Calcula la posición relativa (0–1) de cada duración óptima dentro del rango [min, max]
+    y genera una distribución por deciles, segmentada por tipo de instancia (C, R, RC).
+    También guarda gráficos .png con los histogramas.
+    """
+    distribucion = []
+    with open(solutions_file, "r") as f:
+        all_solutions = json.load(f)
+
+    for solution in all_solutions:
+        instance_name = solution["instance_name"]
+        tipo = "RC" if instance_name.startswith("RC") else instance_name[0]
+        rutas = solution["routes"]
+
+        instance_path = os.path.join(instancias_dir, instance_name + ".json")
+        with open(instance_path, "r") as inst_file:
+            instance_data = json.load(inst_file)
+        time_departures, error = simulacion(solution, instance_data)
+
+        epsilon = 0.1
+        cant_muestras = 5
+
+        for idx_ruta, ruta in enumerate(rutas):
+            path = ruta["path"]
+            intervalos_ruta = [
+                (time_departures[idx_ruta][i][2], time_departures[idx_ruta][i + 1][2])
+                for i in range(len(time_departures[idx_ruta]) - 1)
+            ]
+            arcos_utilizados = [(path[i], path[i + 1]) for i in range(len(path) - 1)]
+            arcos_factibles = clusters_arcos_ruta(instance_name, intervalos_ruta, arcos_utilizados)
+            duracion_arcos_factibles = duracion_arcos(
+                arcos_factibles, intervalos_ruta, instance_name, epsilon, cant_muestras
+            )
+            _, _, rels = metricas(arcos_factibles, duracion_arcos_factibles, time_departures, idx_ruta)
+            for r in rels:
+                if r is None:
+                    continue
+                decil = int(r * 10) if r < 1 else 9
+                distribucion.append({
+                    "instancia": instance_name,
+                    "tipo": tipo,
+                    "decil": f"{decil/10:.1f}-{(decil+1)/10:.1f}",
+                    "valor_relativo": r
+                })
+
+    # --- crear DataFrame ---
+    df = pd.DataFrame(distribucion)
+    resumen = df.groupby(["tipo", "decil"]).size().reset_index(name="count")
+
+    # --- guardar a Excel ---
+    with pd.ExcelWriter(output_file) as writer:
+        df.to_excel(writer, index=False, sheet_name="Datos crudos")
+        resumen.to_excel(writer, index=False, sheet_name="Distribución por deciles")
+
+    print(f"✅ Archivo con distribución guardado en: {output_file}")
+
+    # --- generar gráficos por tipo ---
+    tipos = resumen["tipo"].unique()
+    for tipo in tipos:
+        df_tipo = resumen[resumen["tipo"] == tipo]
+        plt.figure(figsize=(8, 5))
+        plt.bar(df_tipo["decil"], df_tipo["count"], color="steelblue", edgecolor="black")
+        plt.title(f"Distribución por deciles - Tipo {tipo}")
+        plt.xlabel("Decil (posición relativa)")
+        plt.ylabel("Cantidad de arcos")
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.savefig(f"distribucion_{tipo}.png", dpi=300)
+        plt.close()
+        print(f"📊 Gráfico guardado: distribucion_{tipo}.png")
+
+
+# Ejecutar el nuevo análisis con gráficos
+analizar_distribucion_por_deciles(
+    "data//instancias-dabia_et_al_2013/solutions.json",
+    "data/instancias-dabia_et_al_2013",
+    output_file="metricas_distribucion.xlsx"
+)

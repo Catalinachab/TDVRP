@@ -35,7 +35,8 @@ def pwl_f(t: float, i: int, j: int, instance: dict) -> float:
     # Si t está fuera del rango, usar el último punto
     return pts[-1][1]
     '''
-    return fwd(D, t, VZ, Z, per)
+    return fwd(D, t, VZ, Zs, per)
+
 
 INFTY = 10e8; EPS = 10e-6
 def epsilon_equal(a, b): return abs(a - b) < EPS
