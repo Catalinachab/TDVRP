@@ -155,34 +155,6 @@ def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta)
     # devuelvo TODO lo anterior + rels nuevos
     return res, res_str, rels
 
-
-    '''
-    for i in range(len(arcos_factibles)): #recorres los intervalos
-        res.append([])
-
-        duracion_optima = ruta[i][3]
-        minimo = float('inf')
-        maximo = 0
-        for j in range(len(arcos_factibles[i])): #recorres los arcos factibles para un intervalo y t quedas con max y min
-            if duraciones[i][j]!= 0 and duraciones[i][j] > maximo: 
-                maximo = duraciones[i][j]
-            if duraciones[i][j]!= 0 and duraciones[i][j] < minimo:
-                minimo = duraciones[i][j]
-        if(maximo==0):
-            res[i].append((duracion_optima/minimo, None))
-        else: res[i].append((duracion_optima/minimo, duracion_optima/maximo))
-        
-        # si duracion_optima/minimo = 1 => el arco optimo es el "mejor"
-        # si duracion_optima/maximo = 1 => el arco optimo es el "peor"
-        
-        # para ambas divisiones: mientras mas cerca a 1, más cerca del minimo o máximo
-        #   "   "       "      : dominio [0; inf]
-
-        # visualizo que tan lejos estoy del minimo y maximo en valor absoluto         
-    return res 
-    '''
-            
-
 def analizar_metricas_solutions(solutions_file, instancias_dir, output_file="metricas_resultados.xlsx"):
     resultados = []
     rows = []
@@ -244,7 +216,7 @@ def analizar_metricas_solutions(solutions_file, instancias_dir, output_file="met
     i+=1
 
 
-analizar_metricas_solutions("data//instancias-dabia_et_al_2013/solutions.json", "data/instancias-dabia_et_al_2013", output_file="metricas_resultados.xlsx")
+#analizar_metricas_solutions("data//instancias-dabia_et_al_2013/solutions.json", "data/instancias-dabia_et_al_2013", output_file="metricas_resultados.xlsx")
 
 
 # --------------------------------------------------------------------
@@ -326,8 +298,104 @@ def analizar_distribucion_por_deciles(solutions_file, instancias_dir, output_fil
 
 
 # Ejecutar el nuevo análisis con gráficos
-analizar_distribucion_por_deciles(
-    "data//instancias-dabia_et_al_2013/solutions.json",
-    "data/instancias-dabia_et_al_2013",
-    output_file="metricas_distribucion.xlsx"
-)
+#analizar_distribucion_por_deciles( "data//instancias-dabia_et_al_2013/solutions.json", "data/instancias-dabia_et_al_2013",output_file="metricas_distribucion.xlsx")
+
+
+def metrica_distancia(arcos_factibles: dict, distancias, path):
+    
+    res: List[List[Tuple]] = []   # [(ratio_min, ratio_max)] por intervalo
+    res_str = []                  # texto descriptivo por intervalo
+    rels = []                     # lista plana de valores relativos (0–1)
+
+    for idx, (intervalo, arcos) in enumerate(arcos_factibles.items()):
+        res.append([])
+        distancia_optima = path[idx]
+        minimo = 100000000
+        maximo = 0
+        prom = 0
+        for arco in arcos:
+            i, j = arco
+            dist = distancias[i][j]
+            if dist<minimo: minimo = dist
+            if dist>maximo: maximo = dist
+            prom +=dist
+        prom = prom/len(arcos)
+
+        ratio_min = None if minimo == 0 else distancia_optima / minimo
+        ratio_max = None if maximo == 0 else distancia_optima / maximo
+        res[idx].append((ratio_min, ratio_max))
+
+        # cálculo relativo para histograma
+        if maximo == minimo or (maximo == 0 and minimo == 0):
+            rel = None
+            res_str.append("todas las distancias son iguales o nulas")
+        else:
+            rel = (distancia_optima - minimo) / (maximo - minimo)
+            rel = max(0, min(rel, 1))  # asegurar entre 0 y 1
+            res_str.append("mas cerca de la min dist" if rel < 0.5 else "mas cerca de la max dist")
+
+        if rel is not None:
+            rels.append(rel)
+
+    # devuelvo TODO lo anterior + rels nuevos
+    return res, res_str, rels
+
+
+def analizar_metrica_distancia(solutions_file, instancias_dir, output_file="metricas_distancias_resultados.xlsx"):
+    resultados = []
+    rows = []
+    with open(solutions_file, "r") as f:
+        all_solutions = json.load(f)
+    i=0
+    for solution in all_solutions:
+        instance_name = solution["instance_name"]
+        rutas = solution["routes"]
+        instance_path = os.path.join(instancias_dir, instance_name + ".json")
+        with open(instance_path, "r") as inst_file:
+            instance_data = json.load(inst_file)
+        time_departures, error = simulacion(solution, instance_data)
+        distancias = instance_data["distances"]
+        for idx_ruta, ruta in enumerate(rutas):
+            path = ruta["path"]
+            intervalos_ruta = []
+            td_ruta = time_departures[idx_ruta]
+            for i in range(len(td_ruta)-1):
+                inter = (td_ruta[i][2], td_ruta[i+1][2])
+                intervalos_ruta.append(inter)
+            arcos_utilizados = [(path[i], path[i+1]) for i in range(len(path)-1)]
+            arcos_factibles = clusters_arcos_ruta(instance_name, intervalos_ruta, arcos_utilizados)
+            epsilon = 0.1
+            cant_muestras = 5
+            metricas_res, metricas_str, _ = metrica_distancia(arcos_factibles, distancias, path)
+            resultados.extend(metricas_str)
+            cerca_min_ruta = metricas_str.count("mas cerca de la min dist")
+            cerca_max_ruta = metricas_str.count("mas cerca de la max dist")
+            if cerca_min_ruta > cerca_max_ruta:
+                string = "en general arcos elegidos son arcos cortos"
+            elif cerca_min_ruta == cerca_max_ruta:
+                string = "igual cantidad de arcos cortos y largos"    
+            else:
+                string = "en general arcos elegidos son arcos largos"
+            rows.append({
+                "instancia": instance_name,
+                "ruta_numero": idx_ruta,
+                "cantidad de arcos": len(intervalos_ruta),
+                "cerca_min_ruta": cerca_min_ruta,
+                "cerca_max_ruta": cerca_max_ruta,
+                "observacion": string,
+                "metricas": metricas_res
+            })
+    cerca_min = resultados.count("mas cerca de la min dist")
+    cerca_max = resultados.count("mas cerca de la max dist")
+    resumen = {
+        "Total mas cerca de la min dist": cerca_min,
+        "Total mas cerca de la max dist": cerca_max,
+        "Observacion general": "En general, arcos cortos." if cerca_min > cerca_max else "En general, arcos largos."
+    }
+    df = pd.DataFrame(rows)
+    resumen_df = pd.DataFrame([resumen])
+    with pd.ExcelWriter(output_file) as writer:
+        df.to_excel(writer, index=False, sheet_name="Detalle")
+        resumen_df.to_excel(writer, index=False, sheet_name="Resumen")
+    i+=1
+analizar_metrica_distancia("data//instancias-dabia_et_al_2013/solutions.json", "data/instancias-dabia_et_al_2013")
