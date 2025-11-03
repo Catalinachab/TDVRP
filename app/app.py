@@ -259,15 +259,22 @@ if selected_instance:
             value=summary_metrics['optimal_arcs_count'],
             delta=f"{summary_metrics['optimal_arcs_pct']:.1f}%"
         )
-    
     with col3:
+        st.metric(
+            label="Cantidad Arcos Cortos",
+            value=summary_metrics['short_arcs'],
+            
+        )
+    with col4:
         st.metric(
             label="Cerca del Mínimo",
             value=summary_metrics['near_minimum_count'],
             delta=f"{summary_metrics['near_minimum_pct']:.1f}%"
         )
+    col5, col6, col7, col8 = st.columns(4)
     
-    with col4:
+    
+    with col5:
         st.metric(
             label="Decil Promedio",
             value=f"{summary_metrics['avg_decile']:.2f}",
@@ -275,16 +282,14 @@ if selected_instance:
             delta_color="inverse"
         )
     
-    # Métricas adicionales
-    col5, col6, col7 = st.columns(3)
-    
-    with col5:
-        st.metric("Ratio Promedio vs Mínimo", f"{summary_metrics['avg_ratio_to_min']:.3f}")
     
     with col6:
-        st.metric("Ratio Promedio vs Máximo", f"{summary_metrics['avg_ratio_to_max']:.3f}")
+        st.metric("Ratio Promedio vs Mínimo", f"{summary_metrics['avg_ratio_to_min']:.3f}")
     
     with col7:
+        st.metric("Ratio Promedio vs Máximo", f"{summary_metrics['avg_ratio_to_max']:.3f}")
+    
+    with col8:
         st.metric("Arcos Factibles Promedio", f"{summary_metrics['avg_feasible_arcs']:.1f}")
     
     st.divider()
@@ -322,63 +327,6 @@ if selected_instance:
         st.warning("⚠️ **Hipótesis PARCIALMENTE VALIDADA**: Entre 40-60% de arcos en deciles óptimos")
     else:
         st.error("❌ **Hipótesis NO VALIDADA**: Menos del 40% de arcos en deciles óptimos")
-    
-    st.divider()
-    
-    # ============= SECCIÓN 3: MAPA DE RUTAS =============
-    st.subheader("🗺️ Visualización de Rutas")
-    st.markdown("Mapa interactivo de las rutas, coloreadas según el decil de decisión de cada arco.")
-    
-    map_data = core.create_route_map_data(analysis_df)
-    
-    # Solo crear mapa si hay coordenadas válidas
-    if any(d['coords_from'][0] != 0 or d['coords_from'][1] != 0 for d in map_data):
-        # Calcular centro del mapa
-        lats = [d['coords_from'][0] for d in map_data if d['coords_from'][0] != 0]
-        lons = [d['coords_from'][1] for d in map_data if d['coords_from'][1] != 0]
-        
-        if lats and lons:
-            center_lat = sum(lats) / len(lats)
-            center_lon = sum(lons) / len(lons)
-            
-            m = folium.Map(location=[center_lat, center_lon], zoom_start=12)
-            
-            # Agregar arcos al mapa
-            for arc in map_data:
-                folium.PolyLine(
-                    locations=[arc['coords_from'], arc['coords_to']],
-                    color=arc['color'],
-                    weight=4,
-                    opacity=0.7,
-                    popup=f"Arco {arc['arc_id']}<br>Decil: {arc['decile']}<br>Duración: {arc['duration']:.2f}"
-                ).add_to(m)
-                
-                # Marcador en nodo origen
-                folium.CircleMarker(
-                    location=arc['coords_from'],
-                    radius=5,
-                    color=arc['color'],
-                    fill=True,
-                    fillOpacity=0.6
-                ).add_to(m)
-            
-            # Leyenda
-            legend_html = '''
-            <div style="position: fixed; 
-                        bottom: 50px; right: 50px; width: 200px; height: 120px; 
-                        background-color: white; z-index:9999; font-size:14px;
-                        border:2px solid grey; border-radius: 5px; padding: 10px">
-            <p><strong>Calidad de Decisión</strong></p>
-            <p><span style="color:green;">●</span> Óptimo (Deciles 0-2)</p>
-            <p><span style="color:orange;">●</span> Medio (Deciles 3-5)</p>
-            <p><span style="color:red;">●</span> Subóptimo (Deciles 6-9)</p>
-            </div>
-            '''
-            m.get_root().html.add_child(folium.Element(legend_html))
-            
-            st_folium(m, width=1200, height=600)
-    else:
-        st.info("ℹ️ No hay coordenadas geográficas disponibles en esta instancia")
     
     st.divider()
     

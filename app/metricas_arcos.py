@@ -5,8 +5,10 @@ from typing import List, Tuple
 import pandas as pd
 
 #Duda: intervalos_ruta:list[Tuple] es asi?
+#?Duda: habria que usar la de clusters_arcos alterntiva? 
+#? La que devuelve todos los arcos factibles partiendodesde el mismo cliente origen que la solución óptima (path[i]). 
 
-
+#
 def clusters_arcos_ruta(instance_data: dict, intervalos_ruta: list[Tuple], arcos_utilizados) -> dict[tuple, list[tuple]]: 
     '''
     funcion que le pasas una de las rutas de una solucion de una instancia 
@@ -151,3 +153,44 @@ def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta)
 
     # devuelvo TODO lo anterior + rels nuevos
     return res, res_str, rels
+
+def metrica_distancia(arcos_factibles: dict, distancias, path):
+    
+    res: List[List[Tuple]] = []   # [(ratio_min, ratio_max)] por intervalo
+    res_str = []                  # texto descriptivo por intervalo
+    rels = []                     # lista plana de valores relativos (0–1)
+
+    for idx, (intervalo, arcos) in enumerate(arcos_factibles.items()):
+        res.append([])
+        distancia_optima = path[idx]
+        minimo = 100000000
+        maximo = 0
+        prom = 0
+        for arco in arcos:
+            i, j = arco
+            dist = distancias[i][j]
+            if dist<minimo: minimo = dist
+            if dist>maximo: maximo = dist
+            prom +=dist
+        prom = prom/len(arcos)
+
+        ratio_min = None if minimo == 0 else distancia_optima / minimo
+        ratio_max = None if maximo == 0 else distancia_optima / maximo
+        res[idx].append((ratio_min, ratio_max))
+
+        # cálculo relativo para histograma
+        if maximo == minimo or (maximo == 0 and minimo == 0):
+            rel = None
+            res_str.append("todas las distancias son iguales o nulas")
+        else:
+            rel = (distancia_optima - minimo) / (maximo - minimo)
+            rel = max(0, min(rel, 1))  # asegurar entre 0 y 1
+            res_str.append("arco corto" if rel < 0.5 else "arco largo") #entiendo que arco corto seria que es un arco mas cerca del arco de minima distancia
+            #res_str.append("mas cerca de la min dist" if rel < 0.5 else "mas cerca de la max dist")
+
+        if rel is not None:
+            rels.append(rel)
+
+    # devuelvo TODO lo anterior + rels nuevos
+    return res, res_str, rels
+

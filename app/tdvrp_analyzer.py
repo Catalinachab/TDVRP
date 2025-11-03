@@ -14,7 +14,7 @@ import math
 # Importar funciones existentes
 from build_pwl_arc import Z, P, fwd, tau_pts
 from simulacion import simulacion
-from metricas_arcos import clusters_arcos_ruta, duracion_arcos, metricas
+from metricas_arcos import clusters_arcos_ruta, duracion_arcos, metricas, metrica_distancia
 
 
 def process_files(instances_zip_bytes: bytes, solutions_json_bytes: bytes) -> Dict[str, Dict[str, Any]]:
@@ -87,7 +87,7 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
     Ejecuta el análisis completo sobre un par instancia-solución.
     
     Esta es la función CORE que integra toda la lógica de investigación:
-    1. Simula la ruta usando PWL
+    1. Simula la ruta usando PWL #? no seria la fwd en vez de pwl?
     2. Identifica arcos factibles por intervalo
     3. Calcula duraciones y métricas
     4. Asigna deciles de decisión
@@ -145,6 +145,9 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
             arcos_factibles, duracion_arcos_factibles, time_departures, idx_ruta
         )
         
+        distancias = instance_data["distances"]
+        #aca quiero meter metricas_distancia
+        metricas_res_dist, metricas_str_dist, _ = metrica_distancia(arcos_factibles, distancias, path)
         # Construir DataFrame con resultados detallados
         for idx_arco, (intervalo, arcos) in enumerate(arcos_factibles.items()):
             arco_usado = arcos_utilizados[idx_arco]
@@ -182,8 +185,9 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
                 'slowest_feasible_time': max_dur,
                 'ratio_to_min': ratio_min,
                 'ratio_to_max': ratio_max,
+                'longitud arco': metricas_str_dist[idx_arco],
                 'decile_rank': decile,
-                'proximity_category': proximity,
+                'proximity_category': proximity, 
                 'num_feasible_arcs': len(arcos),
                 'node_from_lat': coords[0],
                 'node_from_lon': coords[1],
@@ -253,10 +257,19 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     """
     total_arcs = len(analysis_df)
     
+    if 'longitud arco' in analysis_df.columns:
+        arcos_cortos = (analysis_df['longitud arco'] == 'arco corto').sum()
+    else:
+        print("⚠️ La columna 'longitud arco' no existe en analysis_df")
+    
+    print(analysis_df.columns)
+
+    
     # Contar arcos por categoría de proximidad
     near_min = (analysis_df['proximity_category'] == 'mas cerca del min').sum()
     near_max = (analysis_df['proximity_category'] == 'mas cerca del max').sum()
-    
+    arcos_cortos = (analysis_df['longitud arco'] == 'arco corto').sum()
+    arcos_largos = (analysis_df['longitud arco'] == 'arco largo').sum()
     # Estadísticas de deciles
     avg_decile = analysis_df['decile_rank'].mean()
     deciles_0_2 = (analysis_df['decile_rank'] <= 2).sum()  # Arcos "óptimos"
@@ -265,6 +278,9 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     # Ratios promedio
     avg_ratio_min = analysis_df['ratio_to_min'].mean()
     avg_ratio_max = analysis_df['ratio_to_max'].mean()
+    """ avg_ratio_min_dist = analysis_df['ratio_to_min_dist'].mean()
+    avg_ratio_max_dist = analysis_df['ratio_to_max_dist'].mean() """
+    
     
     return {
         'total_arcs': total_arcs,
@@ -278,6 +294,8 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
         'suboptimal_arcs_count': deciles_7_9,
         'avg_ratio_to_min': avg_ratio_min,
         'avg_ratio_to_max': avg_ratio_max,
+        'short_arcs': arcos_cortos,
+        'long_arcs': arcos_largos,
         'avg_feasible_arcs': analysis_df['num_feasible_arcs'].mean(),
         'total_travel_time': analysis_df['actual_travel_time'].sum()
     }
