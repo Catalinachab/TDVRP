@@ -43,7 +43,7 @@ def clusters_arcos_ruta(instance_data: dict, intervalos_ruta: list[Tuple], arcos
 
 
 def duracion_arcos(clusters_arcos: dict[tuple, list[tuple]], intervalos_ruta: list[Tuple], 
-                   instance_data: dict, epsilon: float, cant_muestras: int) -> dict:
+                instance_data: dict, epsilon: float, cant_muestras: int) -> dict:
     '''
     esta funcion recibe una lista de los arcos factibles por cada arco de una ruta de la solucion y 
     devuelve una lista de listas con las duraciones de cada arco factible
@@ -69,7 +69,7 @@ def duracion_arcos(clusters_arcos: dict[tuple, list[tuple]], intervalos_ruta: li
     '''
     res_dict = {}
     int_idx = 0
-    instance = instance_data  # ✅ Ya no lee archivo
+    instance = instance_data 
     
     for intervalo, arcos in clusters_arcos.items():
         res_temporal = [] # aca ponemos la duracion de cada arco

@@ -80,99 +80,93 @@ def process_files(instances_zip_bytes: bytes, solutions_json_bytes: bytes) -> Di
     
     return paired_data
 
-
 def run_full_analysis(instance_name: str, instance_data: dict, solution_data: dict, 
-                     epsilon: float = 0.1, cant_muestras: int = 10) -> pd.DataFrame:
+                     epsilon: float, cant_muestras: int = 10) -> pd.DataFrame:
     """
     Ejecuta el análisis completo sobre un par instancia-solución.
-    
-    Esta es la función CORE que integra toda la lógica de investigación:
-    1. Simula la ruta usando PWL #? no seria la fwd en vez de pwl?
-    2. Identifica arcos factibles por intervalo
-    3. Calcula duraciones y métricas
-    4. Asigna deciles de decisión
-    
-    Args:
-        instance_name: Nombre de la instancia
-        instance_data: Diccionario con datos de la instancia
-        solution_data: Diccionario con datos de la solución (debe tener "routes")
-        epsilon: Tolerancia para intervalos de tiempo
-        cant_muestras: Muestras para calcular duraciones
-        
-    Returns:
-        DataFrame con columnas detalladas del análisis
     """
-    
+
     results = []
     
-    # Extraer rutas de la solución
     routes = solution_data.get("routes", [])
-    
     if not routes:
         raise ValueError(f"La solución para {instance_name} no contiene rutas")
     
-    # Ejecutar simulación para obtener time_departures
     time_departures, error = simulacion(solution_data, instance_data)
-    
     if error:
         print(f"⚠️ Advertencia: Error en simulación de {instance_name}")
     
-    # Procesar cada ruta
     for idx_ruta, route in enumerate(routes):
         path = route["path"]
         t0 = route["t0"]
-        
-        # Construir intervalos de tiempo de la ruta
+
         intervalos_ruta = []
         td_ruta = time_departures[idx_ruta]
         for i in range(len(td_ruta) - 1):
             inter = (td_ruta[i][2], td_ruta[i+1][2])
             intervalos_ruta.append(inter)
-        
-        # Arcos utilizados en la ruta
+
         arcos_utilizados = [(path[i], path[i+1]) for i in range(len(path) - 1)]
-        
-        # Obtener arcos factibles por intervalo
         arcos_factibles = clusters_arcos_ruta(instance_data, intervalos_ruta, arcos_utilizados)
         
-        # Calcular duraciones de arcos factibles
         duracion_arcos_factibles = duracion_arcos(
             arcos_factibles, intervalos_ruta, instance_data, epsilon, cant_muestras
         )
         
-        # Calcular métricas (ahora devuelve 3 valores)
         metricas_res, metricas_str, rels = metricas(
             arcos_factibles, duracion_arcos_factibles, time_departures, idx_ruta
         )
-        
+
         distancias = instance_data["distances"]
-        #aca quiero meter metricas_distancia
         metricas_res_dist, metricas_str_dist, _ = metrica_distancia(arcos_factibles, distancias, path)
-        # Construir DataFrame con resultados detallados
+
         for idx_arco, (intervalo, arcos) in enumerate(arcos_factibles.items()):
             arco_usado = arcos_utilizados[idx_arco]
-            duracion_optima = td_ruta[idx_arco][3]
-            
-            # Extraer duraciones de todos los arcos factibles
+
+            # ---- DURATIONS WITH SAMPLING (epsilon) ----
             dur_entries = duracion_arcos_factibles.get(intervalo, [])
-            duraciones = [entry["durations"]["mean"] for entry in dur_entries if entry["durations"]["mean"] > 0]
             
-            min_dur = min(duraciones) if duraciones else duracion_optima
-            max_dur = max(duraciones) if duraciones else duracion_optima
+            # ✅ usar TODAS las muestras (no solo el mean)
+            duraciones = []
+            for entry in dur_entries:
+                if "samples" in entry["durations"]:
+                    duraciones.extend([v for v in entry["durations"]["samples"] if v > 0])
+                else:
+                    # fallback si no hay samples (no debería pasar)
+                    duraciones.append(entry["durations"]["mean"])
+
+            # datos factibles
+            min_dur = min(duraciones) if duraciones else None
+            max_dur = max(duraciones) if duraciones else None
             
-            # Calcular ratios
-            ratio_min = duracion_optima / min_dur if min_dur > 0 else None
-            ratio_max = duracion_optima / max_dur if max_dur > 0 else None
-            
-            # Calcular decil
-            decile = _calculate_decile(duracion_optima, duraciones)
-            
-            # Categoría de proximidad
+            # ✅ duración óptima real de la simulación
+            duracion_optima = td_ruta[idx_arco][3]
+            chosen_duration = duracion_optima
+
+            # ratios
+            ratio_min = chosen_duration / min_dur if (min_dur and min_dur > 0) else None
+            ratio_max = chosen_duration / max_dur if (max_dur and max_dur > 0) else None
+
+            # ✅ decil basado en TODAS las muestras factibles
+            decile = _calculate_decile(chosen_duration, duraciones) if duraciones else None
+
             proximity = metricas_str[idx_arco] if idx_arco < len(metricas_str) else "desconocido"
-            
-            # Coordenadas (si están disponibles en la instancia)
             coords = _get_node_coordinates(instance_data, arco_usado[0], arco_usado[1])
-            
+
+            # ---- DISTANCE METRICS ----
+            dists = []
+            for (ii, jj) in arcos:
+                dij = distancias[ii][jj]
+                if dij is not None and dij > 0:
+                    dists.append(dij)
+
+            chosen_dist = distancias[arco_usado[0]][arco_usado[1]] if distancias[arco_usado[0]][arco_usado[1]] is not None else 0.0
+            min_dist = min(dists) if dists else chosen_dist
+            max_dist = max(dists) if dists else chosen_dist
+            ratio_min_dist = (chosen_dist / min_dist) if (min_dist and min_dist > 0) else None
+            ratio_max_dist = (chosen_dist / max_dist) if (max_dist and max_dist > 0) else None
+            distance_decile = _calculate_decile(chosen_dist, dists) if len(dists) > 0 else None
+
             results.append({
                 'route_idx': idx_ruta,
                 'arc_idx': idx_arco,
@@ -180,22 +174,30 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
                 'node_from': arco_usado[0],
                 'node_to': arco_usado[1],
                 'departure_time': intervalo[0],
-                'actual_travel_time': duracion_optima,
+                'actual_travel_time': chosen_duration,
                 'fastest_feasible_time': min_dur,
                 'slowest_feasible_time': max_dur,
                 'ratio_to_min': ratio_min,
                 'ratio_to_max': ratio_max,
                 'longitud arco': metricas_str_dist[idx_arco],
                 'decile_rank': decile,
-                'proximity_category': proximity, 
+                'proximity_category': proximity,
                 'num_feasible_arcs': len(arcos),
                 'node_from_lat': coords[0],
                 'node_from_lon': coords[1],
                 'node_to_lat': coords[2],
-                'node_to_lon': coords[3]
+                'node_to_lon': coords[3],
+
+                'chosen_distance': chosen_dist,
+                'min_feasible_distance': min_dist,
+                'max_feasible_distance': max_dist,
+                'ratio_to_min_dist': ratio_min_dist,
+                'ratio_to_max_dist': ratio_max_dist,
+                'distance_decile': distance_decile,
             })
     
     return pd.DataFrame(results)
+
 
 
 def _calculate_decile(value: float, distribution: List[float]) -> int:
@@ -278,8 +280,7 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     # Ratios promedio
     avg_ratio_min = analysis_df['ratio_to_min'].mean()
     avg_ratio_max = analysis_df['ratio_to_max'].mean()
-    """ avg_ratio_min_dist = analysis_df['ratio_to_min_dist'].mean()
-    avg_ratio_max_dist = analysis_df['ratio_to_max_dist'].mean() """
+    
     
     
     return {
@@ -317,40 +318,34 @@ def create_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
     })
 
 
-def create_route_map_data(analysis_df: pd.DataFrame) -> List[Dict]:
+
+def create_distance_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
     """
-    Prepara datos para visualizar rutas en mapa.
-    
-    Returns:
-        Lista de diccionarios con información de cada arco para Folium
+    Prepara datos para el histograma de deciles pero en términos de DISTANCIA,
+    usando la columna 'distance_decile' que agregamos en run_full_analysis.
     """
-    map_data = []
-    
-    for _, row in analysis_df.iterrows():
-        # Asignar color según decil
-        if row['decile_rank'] <= 2:
-            color = 'green'  # Óptimo
-            category = 'Óptimo (Deciles 0-2)'
-        elif row['decile_rank'] <= 5:
-            color = 'orange'  # Medio
-            category = 'Medio (Deciles 3-5)'
-        else:
-            color = 'red'  # Subóptimo
-            category = 'Subóptimo (Deciles 6-9)'
-        
-        map_data.append({
-            'route_idx': row['route_idx'],
-            'arc_id': row['arc_id'],
-            'coords_from': (row['node_from_lat'], row['node_from_lon']),
-            'coords_to': (row['node_to_lat'], row['node_to_lon']),
-            'color': color,
-            'category': category,
-            'decile': row['decile_rank'],
-            'duration': row['actual_travel_time'],
-            'departure': row['departure_time']
-        })
-    
-    return map_data
+    if 'distance_decile' not in analysis_df.columns:
+        raise ValueError("distance_decile no existe en analysis_df. Asegurate de actualizar run_full_analysis.")
+
+    dec_counts = analysis_df['distance_decile'].value_counts().sort_index()
+    return pd.DataFrame({
+        'DecilDist': dec_counts.index,
+        'Cantidad de Arcos': dec_counts.values,
+        'Porcentaje': (dec_counts.values / len(analysis_df) * 100)
+    })
+
+
+def create_distance_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Prepara datos para el histograma de distancias (arco corto vs largo).
+    """
+    dist_counts = analysis_df['longitud arco'].value_counts()
+
+    return pd.DataFrame({
+        'Categoria Distancia': dist_counts.index,
+        'Cantidad de Arcos': dist_counts.values,
+        'Porcentaje': (dist_counts.values / len(analysis_df) * 100)
+    })
 
 
 def export_results_to_excel(analysis_df: pd.DataFrame, summary_metrics: Dict, 

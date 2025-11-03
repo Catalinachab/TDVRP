@@ -12,6 +12,7 @@ import folium
 from streamlit_folium import st_folium
 import pandas as pd
 import io
+import json
 
 # Importar nuestro motor de análisis
 import tdvrp_analyzer as core
@@ -93,10 +94,10 @@ with st.sidebar:
     st.header("⚙️ Parámetros")
     epsilon = st.slider(
         "Epsilon (tolerancia temporal)",
-        min_value=0.01,
-        max_value=1.0,
-        value=0.1,
-        step=0.01,
+        min_value=0.0,
+        max_value=5000.0,
+        value=0.0,
+        step=1.0,
         help="Diferencia ±t para calcular intervalos"
     )
     
@@ -121,37 +122,37 @@ if instances_file is None or solutions_file is None:
     with col1:
         with st.expander("📦 Estructura del ZIP de Instancias"):
             st.code("""
-instancias.zip
-├── C101_25.json
-├── C102_25.json
-├── C103_25.json
-├── R101_25.json
-├── R102_25.json
-└── RC101_25.json
+            instancias.zip
+            ├── C101_25.json
+            ├── C102_25.json
+            ├── C103_25.json
+            ├── R101_25.json
+            ├── R102_25.json
+            └── RC101_25.json
             """, language="text")
     
     with col2:
         with st.expander("📄 Estructura del JSON de Soluciones"):
             st.code("""
 [
-  {
-    "instance_name": "C101_25",
-    "routes": [
-      {
-        "duration": 2965.20,
-        "path": [0, 23, 22, 21, 26],
-        "t0": 7222.49
-      },
-      ...
-    ],
-    "value": 24709.17,
-    "tags": ["OPT"]
-  },
-  {
-    "instance_name": "C102_25",
-    "routes": [...],
-    ...
-  }
+    {
+        "instance_name": "C101_25",
+        "routes": [
+        {
+            "duration": 2965.20,
+            "path": [0, 23, 22, 21, 26],
+            "t0": 7222.49
+        },
+        ...
+        ],
+        "value": 24709.17,
+        "tags": ["OPT"]
+    },
+    {
+        "instance_name": "C102_25",
+        "routes": [...],
+        ...
+    }
 ]
             """, language="json")
     
@@ -261,7 +262,7 @@ if selected_instance:
         )
     with col3:
         st.metric(
-            label="Cantidad Arcos Cortos",
+            label="Cantidad Arcos Cortos (más cercanos al arco de distancia mínima)",
             value=summary_metrics['short_arcs'],
             
         )
@@ -294,16 +295,17 @@ if selected_instance:
     
     st.divider()
     
-    # ============= SECCIÓN 2: GRÁFICO DE DECILES (CLAVE) =============
-    st.subheader("🎯 Distribución de Decisiones por Decil")
+    # ============= SECCIÓN 2: GRÁFICO DE DECILES (DURACIÓN) =============
+    st.subheader("🎯 Distribución de Decisiones por Decil (Duración)")
+
     st.markdown("""
-    **Este es el gráfico clave de la tesis**. Muestra en qué decil se encuentran los arcos elegidos 
+    Este gráfico muestra en qué decil se encuentran los arcos elegidos 
     en las soluciones óptimas. Si la hipótesis es correcta, esperamos ver una concentración 
     en los deciles bajos (0-2).
     """)
-    
+
     decile_data = core.create_decile_histogram_data(analysis_df)
-    
+
     fig_decile = px.bar(
         decile_data,
         x='Decil',
@@ -312,14 +314,31 @@ if selected_instance:
         title="Distribución de Arcos por Decil de Duración",
         labels={'Decil': 'Decil (0 = Más Rápido, 9 = Más Lento)', 'Cantidad de Arcos': 'Frecuencia'},
         color='Decil',
-        color_continuous_scale='RdYlGn_r'
+        color_continuous_scale='RdYlGn_r',
+        category_orders={'Decil': list(range(10))}  #  fuerza orden 0-9
     )
-    
-    fig_decile.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-    fig_decile.update_layout(height=500, showlegend=False)
-    
+
+    fig_decile.update_traces(
+    texttemplate='%{text:.1f}%',
+    textposition='outside',
+    width=0.7  
+    )
+
+    fig_decile.update_layout(
+        height=500,
+        showlegend=False,
+        xaxis=dict(
+            tickmode='array',
+            tickvals=list(range(10)),  #ticks fijos 0..9
+            ticktext=[str(i) for i in range(10)],
+            tickfont=dict(size=16),   # agranda números del eje
+        ),
+        bargap=0.3,  
+    )
+
+
     st.plotly_chart(fig_decile, use_container_width=True)
-    
+
     # Interpretación automática
     if summary_metrics['optimal_arcs_pct'] > 60:
         st.success("✅ **Hipótesis VALIDADA**: Más del 60% de los arcos están en deciles óptimos (0-2)")
@@ -328,6 +347,53 @@ if selected_instance:
     else:
         st.error("❌ **Hipótesis NO VALIDADA**: Menos del 40% de arcos en deciles óptimos")
     
+    # ============= GRÁFICO DE DECILES (DISTANCIA) =============
+    st.subheader("📏 Distribución de Decisiones por Decil (Distancia)")
+
+    st.markdown("""
+    Este gráfico replica el análisis de deciles pero usando **distancia** en lugar de duración.
+    Mide en qué decil de distancia cae el arco elegido respecto a los arcos factibles del intervalo.
+    """)
+
+    dist_decile_data = core.create_distance_decile_histogram_data(analysis_df)
+
+    fig_dist_decile = px.bar(
+        dist_decile_data,
+        x='DecilDist',
+        y='Cantidad de Arcos',
+        text='Porcentaje',
+        title="Distribución de Arcos por Decil de Distancia",
+        labels={'DecilDist': 'Decil de Distancia (0 = Más Corto, 9 = Más Largo)', 'Cantidad de Arcos': 'Frecuencia'},
+        color='DecilDist',
+        color_continuous_scale='RdYlGn_r',
+        category_orders={'DecilDist': list(range(10))}  # fuerza orden 0-9
+    )
+
+    fig_dist_decile.update_traces(
+    texttemplate='Decil %{x}<br>%{text:.1f}%',
+    textposition='outside',
+    width=0.7
+    )
+
+    fig_dist_decile.update_layout(
+        height=500,
+        showlegend=False,
+        xaxis=dict(
+            type='linear',
+            tickmode='array',
+            tickvals=list(range(10)),
+            ticktext=[str(i) for i in range(10)],
+            tickfont=dict(size=16),
+            range=[-0.5, 9.5] #esta linea me parece rara 
+        ),
+        bargap=0.3
+    )
+
+    st.plotly_chart(fig_dist_decile, use_container_width=True)
+
+
+
+    # ================================================================
     st.divider()
     
     # ============= SECCIÓN 4: TABLA DE DATOS DETALLADOS =============
