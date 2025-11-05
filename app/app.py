@@ -93,10 +93,10 @@ with st.sidebar:
     st.header("⚙️ Parámetros")
     epsilon = st.slider(
         "Epsilon (tolerancia temporal)",
-        min_value=0.01,
-        max_value=1.0,
-        value=0.1,
-        step=0.01,
+        min_value=1,
+        max_value=5000,
+        value=100,
+        step=1,
         help="Diferencia ±t para calcular intervalos"
     )
     
@@ -255,15 +255,16 @@ if selected_instance:
     
     with col2:
         st.metric(
-            label="Arcos Óptimos (Deciles 0-2)",
+            label="Arcos Óptimos - Tiempo (Deciles 0-2)",
             value=summary_metrics['optimal_arcs_count'],
             delta=f"{summary_metrics['optimal_arcs_pct']:.1f}%"
         )
+    
     with col3:
         st.metric(
-            label="Cantidad Arcos Cortos",
-            value=summary_metrics['short_arcs'],
-            
+            label="Arcos Óptimos - Distancia (Deciles 0-2)",
+            value=summary_metrics['optimal_arcs_count_dist'],
+            delta=f"{summary_metrics['optimal_arcs_pct_dist']:.1f}%"
         )
     with col4:
         st.metric(
@@ -271,25 +272,32 @@ if selected_instance:
             value=summary_metrics['near_minimum_count'],
             delta=f"{summary_metrics['near_minimum_pct']:.1f}%"
         )
-    col5, col6, col7, col8 = st.columns(4)
+    col5, col6, col7, col8, col9 = st.columns(5)
     
     
     with col5:
         st.metric(
-            label="Decil Promedio",
+            label="Decil Promedio - Tiempo",
             value=f"{summary_metrics['avg_decile']:.2f}",
             delta="Más bajo = Mejor",
             delta_color="inverse"
         )
     
-    
     with col6:
-        st.metric("Ratio Promedio vs Mínimo", f"{summary_metrics['avg_ratio_to_min']:.3f}")
+        st.metric(
+            label="Decil Promedio - Distancia",
+            value=f"{summary_metrics['avg_decile_distance']:.2f}",
+            delta="Más bajo = Mejor",
+            delta_color="inverse"
+        )
     
     with col7:
-        st.metric("Ratio Promedio vs Máximo", f"{summary_metrics['avg_ratio_to_max']:.3f}")
+        st.metric("Ratio Promedio vs Mínimo - Tiempo", f"{summary_metrics['avg_ratio_to_min']:.3f}")
     
     with col8:
+        st.metric("Ratio Promedio vs Mínimo - Distancia", f"{summary_metrics['avg_ratio_to_min_dist']:.3f}")
+    
+    with col9:
         st.metric("Arcos Factibles Promedio", f"{summary_metrics['avg_feasible_arcs']:.1f}")
     
     st.divider()
@@ -301,7 +309,8 @@ if selected_instance:
     en las soluciones óptimas. Si la hipótesis es correcta, esperamos ver una concentración 
     en los deciles bajos (0-2).
     """)
-    
+
+    st.markdown("### Distribución por Tiempo")
     decile_data = core.create_decile_histogram_data(analysis_df)
     
     fig_decile = px.bar(
@@ -310,23 +319,95 @@ if selected_instance:
         y='Cantidad de Arcos',
         text='Porcentaje',
         title="Distribución de Arcos por Decil de Duración",
-        labels={'Decil': 'Decil (0 = Más Rápido, 9 = Más Lento)', 'Cantidad de Arcos': 'Frecuencia'},
+        labels={'Decil': 'Decil (0 = Más Rápido)', 'Cantidad de Arcos': 'Frecuencia'},
         color='Decil',
         color_continuous_scale='RdYlGn_r'
     )
     
     fig_decile.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-    fig_decile.update_layout(height=500, showlegend=False)
+    fig_decile.update_layout(height=400, showlegend=False)
+    
+    # Ajustar layout para que se vea el texto
+    max_value = decile_data['Cantidad de Arcos'].max()
+    
+    fig_decile.update_layout(
+        height=450,  # Aumentar altura
+        showlegend=False,
+        xaxis=dict(
+            tickmode='array',
+            tickvals=list(range(10)),
+            ticktext=[str(i) for i in range(10)],
+            range=[-0.5, 9.5]
+        ),
+        yaxis=dict(
+            range=[0, max_value * 1.15]  # Añadir 15% extra de espacio arriba
+        ),
+        margin=dict(t=60, b=40, l=40, r=40)  # Ajustar márgenes
+    )
     
     st.plotly_chart(fig_decile, use_container_width=True)
     
-    # Interpretación automática
     if summary_metrics['optimal_arcs_pct'] > 60:
-        st.success("✅ **Hipótesis VALIDADA**: Más del 60% de los arcos están en deciles óptimos (0-2)")
+        st.success("✅ **Tiempo - Hipótesis VALIDADA**: >60% en deciles óptimos")
     elif summary_metrics['optimal_arcs_pct'] > 40:
-        st.warning("⚠️ **Hipótesis PARCIALMENTE VALIDADA**: Entre 40-60% de arcos en deciles óptimos")
+        st.warning("⚠️ **Tiempo - Hipótesis PARCIAL**: 40-60% en deciles óptimos")
     else:
-        st.error("❌ **Hipótesis NO VALIDADA**: Menos del 40% de arcos en deciles óptimos")
+        st.error("❌ **Tiempo - Hipótesis NO VALIDADA**: <40% en deciles óptimos")
+    
+    st.markdown("### Distribución por Distancia")
+    decile_data_dist = core.create_distance_decile_histogram_data(analysis_df)
+    
+    fig_decile_dist = px.bar(
+        decile_data_dist,
+        x='Decil',
+        y='Cantidad de Arcos',
+        text='Porcentaje',
+        title="Distribución de Arcos por Decil de Distancia",
+        labels={'Decil': 'Decil (0 = Más Corto)', 'Cantidad de Arcos': 'Frecuencia'},
+        color='Decil',
+        color_continuous_scale='Blues'
+    )
+    
+    fig_decile_dist.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
+    fig_decile_dist.update_layout(height=400, showlegend=False)
+    
+    fig_decile_dist.update_layout(
+        height=400, 
+        showlegend=False,
+        xaxis=dict(
+            tickmode='array',
+            tickvals=list(range(10)),  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ticktext=[str(i) for i in range(10)],  # ['0', '1', '2', ..., '9']
+            range=[-0.5, 9.5]  # Asegurar que se vean todos los valores
+        )
+    )
+    
+    # Ajustar layout para que se vea el texto
+    max_value_dist = decile_data_dist['Cantidad de Arcos'].max()
+    
+    fig_decile_dist.update_layout(
+        height=450,  # Aumentar altura
+        showlegend=False,
+        xaxis=dict(
+            tickmode='array',
+            tickvals=list(range(10)),
+            ticktext=[str(i) for i in range(10)],
+            range=[-0.5, 9.5]
+        ),
+        yaxis=dict(
+            range=[0, max_value_dist * 1.15]  # Añadir 15% extra de espacio arriba
+        ),
+        margin=dict(t=60, b=40, l=40, r=40)  # Ajustar márgenes
+    )
+    st.plotly_chart(fig_decile_dist, use_container_width=True)
+
+    if summary_metrics['optimal_arcs_pct_dist'] > 60:
+        st.success("✅ **Distancia - Hipótesis VALIDADA**: >60% en deciles óptimos")
+    elif summary_metrics['optimal_arcs_pct_dist'] > 40:
+        st.warning("⚠️ **Distancia - Hipótesis PARCIAL**: 40-60% en deciles óptimos")
+    else:
+        st.error("❌ **Distancia - Hipótesis NO VALIDADA**: <40% en deciles óptimos")
+
     
     st.divider()
     
@@ -387,7 +468,8 @@ if selected_instance:
         with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
             analysis_df.to_excel(writer, sheet_name='Detalle_Arcos', index=False)
             pd.DataFrame([summary_metrics]).to_excel(writer, sheet_name='Resumen', index=False)
-            decile_data.to_excel(writer, sheet_name='Distribucion_Deciles', index=False)
+            decile_data.to_excel(writer, sheet_name='Distribucion_Deciles_Tiempo', index=False)
+            decile_data_dist.to_excel(writer, sheet_name='Distribucion_Deciles_Distancia', index=False)
         
         st.download_button(
             label="📥 Descargar Excel Completo",

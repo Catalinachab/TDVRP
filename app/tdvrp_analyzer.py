@@ -155,18 +155,39 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
             
             # Extraer duraciones de todos los arcos factibles
             dur_entries = duracion_arcos_factibles.get(intervalo, [])
+            
             duraciones = [entry["durations"]["mean"] for entry in dur_entries if entry["durations"]["mean"] > 0]
+            
+            # Extraer distancias de todos los arcos factibles para este intervalo
+            distancias_factibles = []
+            for arco in arcos:  # arcos son TODOS los arcos factibles para este intervalo
+                i, j = arco
+                if i < len(distancias) and j < len(distancias[i]):
+                    dist = distancias[i][j]
+                    if dist > 0:
+                        distancias_factibles.append(dist)
+        
+            # Distancia del arco utilizado
+            distancia_optima = distancias[arco_usado[0]][arco_usado[1]] if distancias else 0
+            
+            if not distancias_factibles and distancia_optima > 0:
+                distancias_factibles = [distancia_optima]    
             
             min_dur = min(duraciones) if duraciones else duracion_optima
             max_dur = max(duraciones) if duraciones else duracion_optima
+            min_dist = min(distancias_factibles) if distancias_factibles else distancia_optima
+            max_dist = max(distancias_factibles) if distancias_factibles else distancia_optima
             
             # Calcular ratios
             ratio_min = duracion_optima / min_dur if min_dur > 0 else None
             ratio_max = duracion_optima / max_dur if max_dur > 0 else None
+            ratio_min_dist = distancia_optima / min_dist if min_dist > 0 else None
+            ratio_max_dist = distancia_optima / max_dist if max_dist > 0 else None
             
-            # Calcular decil
+            # Calcular deciles
             decile = _calculate_decile(duracion_optima, duraciones)
-            
+            decile_dist = _calculate_decile(distancia_optima, distancias_factibles)
+                        
             # Categoría de proximidad
             proximity = metricas_str[idx_arco] if idx_arco < len(metricas_str) else "desconocido"
             
@@ -183,10 +204,16 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
                 'actual_travel_time': duracion_optima,
                 'fastest_feasible_time': min_dur,
                 'slowest_feasible_time': max_dur,
+                'actual_distance': distancia_optima,
+                'shortest_feasible_distance': min_dist,
+                'longest_feasible_distance': max_dist,
                 'ratio_to_min': ratio_min,
                 'ratio_to_max': ratio_max,
+                'ratio_to_min_dist': ratio_min_dist,
+                'ratio_to_max_dist': ratio_max_dist,
                 'longitud arco': metricas_str_dist[idx_arco],
                 'decile_rank': decile,
+                'decile_rank_distance': decile_dist,
                 'proximity_category': proximity, 
                 'num_feasible_arcs': len(arcos),
                 'node_from_lat': coords[0],
@@ -278,8 +305,14 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     # Ratios promedio
     avg_ratio_min = analysis_df['ratio_to_min'].mean()
     avg_ratio_max = analysis_df['ratio_to_max'].mean()
-    """ avg_ratio_min_dist = analysis_df['ratio_to_min_dist'].mean()
-    avg_ratio_max_dist = analysis_df['ratio_to_max_dist'].mean() """
+       # Estadísticas de deciles para distancia
+    avg_decile_dist = analysis_df['decile_rank_distance'].mean()
+    deciles_0_2_dist = (analysis_df['decile_rank_distance'] <= 2).sum()  # Arcos "óptimos" en distancia
+    deciles_7_9_dist = (analysis_df['decile_rank_distance'] >= 7).sum()  # Arcos "subóptimos" en distancia
+    
+    # Ratios promedio para distancia
+    avg_ratio_min_dist = analysis_df['ratio_to_min_dist'].mean()
+    avg_ratio_max_dist = analysis_df['ratio_to_max_dist'].mean()
     
     
     return {
@@ -289,11 +322,17 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
         'near_maximum_count': near_max,
         'near_minimum_pct': (near_min / total_arcs * 100) if total_arcs > 0 else 0,
         'avg_decile': avg_decile,
+        'avg_decile_distance': avg_decile_dist,
         'optimal_arcs_count': deciles_0_2,
         'optimal_arcs_pct': (deciles_0_2 / total_arcs * 100) if total_arcs > 0 else 0,
+        'optimal_arcs_count_dist': deciles_0_2_dist,
+        'optimal_arcs_pct_dist': (deciles_0_2_dist / total_arcs * 100) if total_arcs > 0 else 0,
         'suboptimal_arcs_count': deciles_7_9,
+        'suboptimal_arcs_count_dist': deciles_7_9_dist,
         'avg_ratio_to_min': avg_ratio_min,
         'avg_ratio_to_max': avg_ratio_max,
+        'avg_ratio_to_min_dist': avg_ratio_min_dist,
+        'avg_ratio_to_max_dist': avg_ratio_max_dist,
         'short_arcs': arcos_cortos,
         'long_arcs': arcos_largos,
         'avg_feasible_arcs': analysis_df['num_feasible_arcs'].mean(),
@@ -316,6 +355,20 @@ def create_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
         'Porcentaje': (decile_counts.values / len(analysis_df) * 100)
     })
 
+def create_distance_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Prepara datos para el histograma de deciles de distancia.
+    
+    Returns:
+        DataFrame listo para Plotly con conteos por decil de distancia
+    """
+    decile_counts = analysis_df['decile_rank_distance'].value_counts().sort_index()
+    
+    return pd.DataFrame({
+        'Decil': decile_counts.index,
+        'Cantidad de Arcos': decile_counts.values,
+        'Porcentaje': (decile_counts.values / len(analysis_df) * 100)
+    })
 
 def create_route_map_data(analysis_df: pd.DataFrame) -> List[Dict]:
     """
