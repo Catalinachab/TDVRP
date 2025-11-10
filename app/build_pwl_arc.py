@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# τ(x) PWL para un arco i->j (corto y al pie)
 import json, math, argparse, csv
 
 def Z(I):
@@ -41,6 +39,17 @@ def fwd(D, x, VZ, Zs, per):  # tiempo exacto recorriendo zonas
     # si se sale del for, es que no se ha podido recorrer la distancia D
     return math.inf
 
+
+
+
+
+
+######################################################################
+# La implementación debajo NO se usa en el código final para los análisis, pero puede ser útil para entender el concepto de PWL, o para implementaciones futuras.
+
+# Primer approach: generar la PWL generando los breakpoints [ al final solo usamos fwd() ]
+######################################################################
+
 def back(T, D, VZ, Zs, per):  # x tal que distancia(x->T)=D}
     '''
     instante x tal que yendo desde x se llega a T recorriendo distancia D. si no existe, devuelve NaN'''
@@ -58,7 +67,9 @@ def back(T, D, VZ, Zs, per):  # x tal que distancia(x->T)=D}
 
 def tau_pts(D, VZ, Zs, per):
     '''
-    puntos de τ(x) para x en [0, per]. Devuelve lista de tuplas (x, τ(x)). es decir, (instante de salida, duración del viaje)
+    puntos de τ(x) para x en [0, per]. 
+    Devuelve lista de tuplas (x, τ(x)). es decir, (instante de salida, duración del viaje)
+    En otras palabras, PWL para un arco i->j
     '''
     B = {a % per for a, _ in Zs}          # inicios de zona
     for a, _ in Zs:                       # preimágenes de inicios (o sea, x tales que τ(x) es un inicio de zona)

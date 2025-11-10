@@ -4,11 +4,6 @@ from simulacion import *
 from typing import List, Tuple
 import pandas as pd
 
-#Duda: intervalos_ruta:list[Tuple] es asi?
-#?Duda: habria que usar la de clusters_arcos alterntiva? 
-#? La que devuelve todos los arcos factibles partiendodesde el mismo cliente origen que la solución óptima (path[i]). 
-
-#
 def clusters_arcos_ruta(instance_data: dict, intervalos_ruta: list[Tuple], arcos_utilizados) -> dict[tuple, list[tuple]]: 
     '''
     funcion que le pasas una de las rutas de una solucion de una instancia 
@@ -23,22 +18,21 @@ def clusters_arcos_ruta(instance_data: dict, intervalos_ruta: list[Tuple], arcos
     I = instance_data 
     TW = I["time_windows"]  # [r_k, d_k]
     ST = I["service_times"]
-    clientes = len(TW) - 2 # saco los depositos
-    clusters_de_arcos = {} # k, v = (intervalo de tiempo, lista de arcos que se podrían haber usado en ese intervalo de tiempo)
+    clientes = len(TW) - 2 # saco los depositos (0 y n-1)
+    clusters_de_arcos = {} # key, value = (intervalo de tiempo, lista de arcos que se podrían haber usado partiendo de ese intervalo de tiempo)
     
     for inter in range(len(intervalos_ruta)):
         intervalo = intervalos_ruta[inter]
         clusters_de_arcos[intervalo] = []
         for i in range(len(TW)):
-            #quizas que juanjo chquee esto
-            if TW[i][0] <= intervalo[0] and TW[i][1] > intervalo[0]: #veo que la ventana de tiempo del cliente i este dentro del intervalo que queremos analizar
+            if TW[i][0] <= intervalo[0] and TW[i][1] > intervalo[0]: # veo que la ventana de tiempo del cliente i este dentro del intervalo que queremos analizar
                 for j in range(len(TW)):
                     # [r_k + s_k + pwl_f] < tw[j][1] ---> limite de factibilidad por ventana de tiempo
                     t_cur = TW[i][0] + ST[i]
                     if (t_cur + pwl_f(t_cur, i, j, I)) <= TW[j][1]:
-                        if TW[j][0] <= intervalo[0] and TW[j][1] > intervalo[0]: #hago lo mismo con j
-                            if i != j: #chequeas que sea un arco optimo
-                                clusters_de_arcos[intervalo].append((i, j)) #se podría usar este arco ij =>lo guardo como una tupla
+                        if TW[j][0] <= intervalo[0] and TW[j][1] > intervalo[0]: # hago lo mismo con j
+                            if i != j: # chequeas que sea un arco optimo
+                                clusters_de_arcos[intervalo].append((i, j)) # se podría usar este arco ij =>lo guardo como una tupla
     return clusters_de_arcos
 
 
@@ -48,14 +42,14 @@ def duracion_arcos(clusters_arcos: dict[tuple, list[tuple]], intervalos_ruta: li
     esta funcion recibe una lista de los arcos factibles por cada arco de una ruta de la solucion y 
     devuelve una lista de listas con las duraciones de cada arco factible
 
-    Args:
+    recibe:
         clusters_arcos: dict de arcos factibles por intervalo
         intervalos_ruta: lista de intervalos de tiempo
         instance_data: Diccionario con datos de la instancia (EN MEMORIA)
         epsilon: diferencia ±t para calcular intervalos
         cant_muestras: cantidad de muestras por intervalo
         
-    Retorna un diccionario:
+    devuelve un diccionario con esta estructura:
       {
         intervalo_tuple: [
             {
@@ -69,17 +63,24 @@ def duracion_arcos(clusters_arcos: dict[tuple, list[tuple]], intervalos_ruta: li
     '''
     res_dict = {}
     int_idx = 0
-    instance = instance_data  # ✅ Ya no lee archivo
-    
+    instance = instance_data
+
     for intervalo, arcos in clusters_arcos.items():
-        res_temporal = [] # aca ponemos la duracion de cada arco
+        res_temporal = [] # res_temporal guarda la duracion de cada arco
         res_dict[intervalo] = []
         for arco in arcos:
             int_epsilon = [intervalos_ruta[int_idx][0] - epsilon, intervalos_ruta[int_idx][0] + epsilon]
+
+            # validación para asegurar que el intervalo esté dentro del horizonte
+            if int_epsilon[0] < 0:
+                int_epsilon[0] = 0.0
+            if int_epsilon[1] > instance["horizon"][1]:
+                int_epsilon[1] = instance["horizon"][1]
+
             d = []
             for m in range(cant_muestras):
                 # siempre calculamos la duracion partiendo de un t_i, pero ahora tenemos un intervalo del que pueden partir. ¿cómo elegimos ese t_i inicial? --> promediando varios puntos dentro del intervalo
-                t_salida = int_epsilon[0] + m * (int_epsilon[1] - int_epsilon[0]) / (cant_muestras - 1)
+                t_salida = int_epsilon[0] + m * (int_epsilon[1] - int_epsilon[0]) / (cant_muestras - 1) # 
                 duracion = pwl_f(t_salida, arco[0], arco[1], instance) 
                 d.append(duracion)
             
@@ -102,13 +103,17 @@ def duracion_arcos(clusters_arcos: dict[tuple, list[tuple]], intervalos_ruta: li
 
 def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta):
     '''
-    Calcula ratios, clasifica más cerca del min/max (como antes)
+    Calcula ratios, clasifica más cerca del min/max
     y además devuelve las posiciones relativas (rels) para análisis por deciles.
+    devuelve: 
+    - res: List[List[Tuple]]   # [(duracion_optima / min, duracion_optima / max)] por intervalo
+    - res_str: List[str]       # string que dice si el óptiom está más cerca del min o del max por intervalo (threshold 0.5)
+    - rels: List[float]        # lista con distancia normalizada (0–1) por deciles entre el óptimo y el (min, max) por intervalo
     '''
     ruta = time_departures[idx_ruta]
-    res: List[List[Tuple]] = []   # [(ratio_min, ratio_max)] por intervalo
-    res_str = []                  # texto descriptivo por intervalo
-    rels = []                     # lista plana de valores relativos (0–1)
+    res: List[List[Tuple]] = []
+    res_str = []               
+    rels = []                  
 
     for idx, (intervalo, arcos) in enumerate(arcos_factibles.items()):
         res.append([])
@@ -135,8 +140,8 @@ def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta)
         else:
             minimo, maximo = 0.0, 0.0
 
-        ratio_min = None if minimo == 0 else duracion_optima / minimo
-        ratio_max = None if maximo == 0 else duracion_optima / maximo
+        ratio_min = None if minimo == 0 else duracion_optima / minimo # el ratio es optima/minimo (osea, cuanto mas cerca de 1, más cerca del minimo)
+        ratio_max = None if maximo == 0 else duracion_optima / maximo # el ratio es optima/maximo (osea, cuanto mas cerca de 1, más cerca del maximo)
         res[idx].append((ratio_min, ratio_max))
 
         # cálculo relativo para histograma
@@ -151,14 +156,18 @@ def metricas(arcos_factibles: dict, duraciones: dict, time_departures, idx_ruta)
         if rel is not None:
             rels.append(rel)
 
-    # devuelvo TODO lo anterior + rels nuevos
     return res, res_str, rels
 
 def metrica_distancia(arcos_factibles: dict, distancias, path):
-    
-    res: List[List[Tuple]] = []   # [(ratio_min, ratio_max)] por intervalo
-    res_str = []                  # texto descriptivo por intervalo
-    rels = []                     # lista plana de valores relativos (0–1)
+    '''
+    devuelve: 
+    - res: List[List[Tuple]]   # [(duracion_optima / min, duracion_optima / max)] por intervalo
+    - res_str: List[str]       # string que dice si el óptiom está más cerca del min o del max por intervalo (threshold 0.5)
+    - rels: List[float]        # lista con distancia normalizada (0–1) por deciles entre el óptimo y el (min, max) por intervalo
+    '''
+    res: List[List[Tuple]] = []   
+    res_str = []                  
+    rels = []                     
 
     for idx, (intervalo, arcos) in enumerate(arcos_factibles.items()):
         res.append([])
@@ -190,7 +199,5 @@ def metrica_distancia(arcos_factibles: dict, distancias, path):
 
         if rel is not None:
             rels.append(rel)
-
-    # devuelvo TODO lo anterior + rels nuevos
     return res, res_str, rels
 

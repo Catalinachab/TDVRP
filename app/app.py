@@ -1,7 +1,4 @@
 """
-TDVRP Analyzer - Herramienta de Análisis Interactiva
-Tesis TD8: Problema de Ruteo de Vehículos Dependiente del Tiempo
-
 Aplicación web para visualizar y evaluar soluciones óptimas de TDVRP
 """
 
@@ -12,8 +9,6 @@ import folium
 from streamlit_folium import st_folium
 import pandas as pd
 import io
-
-# Importar nuestro motor de análisis
 import tdvrp_analyzer as core
 
 # ============= CONFIGURACIÓN DE LA PÁGINA =============
@@ -238,7 +233,7 @@ if page == "Análisis Individual":
         # Ejecutar análisis
         with st.spinner("🔬 Ejecutando análisis completo..."):
             try:
-                analysis_df = core.run_full_analysis(
+                analysis_df = core.correr_analisis_instancia(
                     instance_name=selected_instance,
                     instance_data=instance_data,
                     solution_data=solution_data,
@@ -246,7 +241,7 @@ if page == "Análisis Individual":
                     cant_muestras=cant_muestras
                 )
                 
-                summary_metrics = core.get_summary_metrics(analysis_df)
+                summary_metrics = core.resumen_metricas(analysis_df)
                 
                 st.success("✅ Análisis completado exitosamente")
                 
@@ -325,7 +320,7 @@ if page == "Análisis Individual":
         """)
 
         st.markdown("### Distribución por Tiempo")
-        decile_data = core.create_decile_histogram_data(analysis_df)
+        decile_data = core.datos_histograma_tiempo(analysis_df)
         
         fig_decile = px.bar(
             decile_data,
@@ -369,7 +364,7 @@ if page == "Análisis Individual":
             st.error("❌ **Tiempo - Hipótesis NO VALIDADA**: <40% en deciles óptimos")
         
         st.markdown("### Distribución por Distancia")
-        decile_data_dist = core.create_distance_decile_histogram_data(analysis_df)
+        decile_data_dist = core.datos_histograma_distancia(analysis_df)
         
         fig_decile_dist = px.bar(
             decile_data_dist,
@@ -535,13 +530,13 @@ elif page == "Análisis Global":
         with st.spinner("🔬 Procesando todas las instancias..."):
             try:
                 # Ejecutar análisis global
-                global_df, global_metrics = core.run_global_analysis(
+                global_df, global_metrics = core.correr_analisis_general(
                     paired_data=st.session_state['paired_data'],
                     epsilon=epsilon,
                     cant_muestras=cant_muestras
                 )
                 
-                comparison_data = core.create_global_comparison_data(global_df)
+                comparison_data = core.datos_comparacion_general(global_df)
                 
                 # Guardar en session state
                 st.session_state['global_df'] = global_df
@@ -664,7 +659,7 @@ elif page == "Análisis Global":
         with col_exp1:
             # Excel completo
             buffer_global = io.BytesIO()
-            core.export_global_analysis_excel(global_df, global_metrics, comparison_data, "temp.xlsx")
+            core.export_general_analysis_excel(global_df, global_metrics, comparison_data, "temp.xlsx")
             
             # Recrear el buffer para descarga
             with pd.ExcelWriter(buffer_global, engine='openpyxl') as writer:

@@ -1,6 +1,6 @@
 """
-Motor de análisis para TDVRP (Time-Dependent Vehicle Routing Problem)
-Integra toda la lógica de cálculo PWL, simulación y análisis de factibilidad
+Este archivo contiene la lógica principal para analizar soluciones del TDVRP.
+Integra toda la lógica de cálculo PWL 'build_pwl_arc.py', simulación 'simulacion.py' y análisis de métricas 'metricas_arcos.py'.
 """
 
 import pandas as pd
@@ -10,8 +10,6 @@ import io
 import zipfile
 from typing import Dict, List, Tuple, Any
 import math
-
-# Importar funciones existentes
 from build_pwl_arc import Z, P, fwd, tau_pts
 from simulacion import simulacion
 from metricas_arcos import clusters_arcos_ruta, duracion_arcos, metricas, metrica_distancia
@@ -22,12 +20,13 @@ def process_files(instances_zip_bytes: bytes, solutions_json_bytes: bytes) -> Di
     Procesa archivos de instancias (ZIP) y soluciones (JSON).
     Empareja automáticamente instancias con sus soluciones basándose en instance_name.
     
-    Args:
-        instances_zip_bytes: Contenido binario del archivo .zip con instancias
-        solutions_json_bytes: Contenido binario del archivo JSON con todas las soluciones
+    recibe:
+        instances.zip: archivo .zip con instancias (binario)
+        solutions.json: archivo JSON con todas las soluciones (binario)
         
-    Returns:
-        Dict con estructura: {
+    devuelve:
+        diccionario Dict con estructura: 
+        {
             'nombre_instancia': {
                 'instance': dict (datos JSON de la instancia),
                 'solution': dict (datos de la solución para esa instancia)
@@ -75,31 +74,31 @@ def process_files(instances_zip_bytes: bytes, solutions_json_bytes: bytes) -> Di
                         'solution': solutions_index[instance_name]
                     }
             except Exception as e:
-                print(f"⚠️ Error al leer instancia {filename}: {str(e)}")
+                print(f"Error al leer instancia {filename}: {str(e)}")
                 continue
     
     return paired_data
 
 
-def run_full_analysis(instance_name: str, instance_data: dict, solution_data: dict, 
+def correr_analisis_instancia(instance_name: str, instance_data: dict, solution_data: dict, 
                      epsilon: float = 0.1, cant_muestras: int = 10) -> pd.DataFrame:
     """
     Ejecuta el análisis completo sobre un par instancia-solución.
     
-    Esta es la función CORE que integra toda la lógica de investigación:
-    1. Simula la ruta usando PWL #? no seria la fwd en vez de pwl?
+    Esta es la función principal, que integra toda la lógica de investigación:
+    1. Simula la ruta usando simulacion.py
     2. Identifica arcos factibles por intervalo
     3. Calcula duraciones y métricas
     4. Asigna deciles de decisión
     
-    Args:
+    recibe:
         instance_name: Nombre de la instancia
         instance_data: Diccionario con datos de la instancia
         solution_data: Diccionario con datos de la solución (debe tener "routes")
         epsilon: Tolerancia para intervalos de tiempo
         cant_muestras: Muestras para calcular duraciones
         
-    Returns:
+    devuelve:
         DataFrame con columnas detalladas del análisis
     """
     
@@ -115,7 +114,7 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
     time_departures, error = simulacion(solution_data, instance_data)
     
     if error:
-        print(f"⚠️ Advertencia: Error en simulación de {instance_name}")
+        print(f"Advertencia: Error en simulación de {instance_name}")
     
     # Procesar cada ruta
     for idx_ruta, route in enumerate(routes):
@@ -146,8 +145,9 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
         )
         
         distancias = instance_data["distances"]
-        #aca quiero meter metricas_distancia
+        
         metricas_res_dist, metricas_str_dist, _ = metrica_distancia(arcos_factibles, distancias, path)
+        
         # Construir DataFrame con resultados detallados
         for idx_arco, (intervalo, arcos) in enumerate(arcos_factibles.items()):
             arco_usado = arcos_utilizados[idx_arco]
@@ -185,14 +185,14 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
             ratio_max_dist = distancia_optima / max_dist if max_dist > 0 else None
             
             # Calcular deciles
-            decile = _calculate_decile(duracion_optima, duraciones)
-            decile_dist = _calculate_decile(distancia_optima, distancias_factibles)
+            decile = _calcular_decil(duracion_optima, duraciones)
+            decile_dist = _calcular_decil(distancia_optima, distancias_factibles)
                         
             # Categoría de proximidad
             proximity = metricas_str[idx_arco] if idx_arco < len(metricas_str) else "desconocido"
             
             # Coordenadas (si están disponibles en la instancia)
-            coords = _get_node_coordinates(instance_data, arco_usado[0], arco_usado[1])
+            coords = _obtener_coordenadas(instance_data, arco_usado[0], arco_usado[1])
             
             results.append({
                 'route_idx': idx_ruta,
@@ -225,15 +225,15 @@ def run_full_analysis(instance_name: str, instance_data: dict, solution_data: di
     return pd.DataFrame(results)
 
 
-def _calculate_decile(value: float, distribution: List[float]) -> int:
+def _calcular_decil(value: float, distribution: List[float]) -> int:
     """
     Calcula en qué decil cae un valor dentro de una distribución.
     
-    Args:
-        value: Valor a clasificar
-        distribution: Lista de valores que forman la distribución
+    recibe:
+        - value: Valor a clasificar
+        - distribution: Lista de valores que forman la distribución
         
-    Returns:
+    devuelve:
         Decil (0-9), donde 0 es el decil más bajo (valores más pequeños)
     """
     if not distribution or len(distribution) == 0:
@@ -250,11 +250,11 @@ def _calculate_decile(value: float, distribution: List[float]) -> int:
     return 9  # Último decil
 
 
-def _get_node_coordinates(instance_data: dict, node_from: int, node_to: int) -> Tuple[float, float, float, float]:
+def _obtener_coordenadas(instance_data: dict, node_from: int, node_to: int) -> Tuple[float, float, float, float]:
     """
     Extrae coordenadas de nodos de la instancia.
     
-    Returns:
+    devuelve:
         Tupla (lat_from, lon_from, lat_to, lon_to)
     """
     # Intentar diferentes estructuras de datos
@@ -275,7 +275,7 @@ def _get_node_coordinates(instance_data: dict, node_from: int, node_to: int) -> 
         return (0.0, 0.0, 0.0, 0.0)
 
 
-def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
+def resumen_metricas(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     """
     Calcula métricas resumen clave para validar la hipótesis.
     
@@ -287,7 +287,7 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     if 'longitud arco' in analysis_df.columns:
         arcos_cortos = (analysis_df['longitud arco'] == 'arco corto').sum()
     else:
-        print("⚠️ La columna 'longitud arco' no existe en analysis_df")
+        print("La columna 'longitud arco' no existe en analysis_df")
     
     print(analysis_df.columns)
 
@@ -340,7 +340,7 @@ def get_summary_metrics(analysis_df: pd.DataFrame) -> Dict[str, Any]:
     }
 
 
-def create_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
+def datos_histograma_tiempo(analysis_df: pd.DataFrame) -> pd.DataFrame:
     """
     Prepara datos para el histograma de deciles (gráfico clave de la tesis).
     
@@ -355,7 +355,7 @@ def create_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
         'Porcentaje': (decile_counts.values / len(analysis_df) * 100)
     })
 
-def create_distance_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataFrame:
+def datos_histograma_distancia(analysis_df: pd.DataFrame) -> pd.DataFrame:
     """
     Prepara datos para el histograma de deciles de distancia.
     
@@ -369,42 +369,6 @@ def create_distance_decile_histogram_data(analysis_df: pd.DataFrame) -> pd.DataF
         'Cantidad de Arcos': decile_counts.values,
         'Porcentaje': (decile_counts.values / len(analysis_df) * 100)
     })
-
-def create_route_map_data(analysis_df: pd.DataFrame) -> List[Dict]:
-    """
-    Prepara datos para visualizar rutas en mapa.
-    
-    Returns:
-        Lista de diccionarios con información de cada arco para Folium
-    """
-    map_data = []
-    
-    for _, row in analysis_df.iterrows():
-        # Asignar color según decil
-        if row['decile_rank'] <= 2:
-            color = 'green'  # Óptimo
-            category = 'Óptimo (Deciles 0-2)'
-        elif row['decile_rank'] <= 5:
-            color = 'orange'  # Medio
-            category = 'Medio (Deciles 3-5)'
-        else:
-            color = 'red'  # Subóptimo
-            category = 'Subóptimo (Deciles 6-9)'
-        
-        map_data.append({
-            'route_idx': row['route_idx'],
-            'arc_id': row['arc_id'],
-            'coords_from': (row['node_from_lat'], row['node_from_lon']),
-            'coords_to': (row['node_to_lat'], row['node_to_lon']),
-            'color': color,
-            'category': category,
-            'decile': row['decile_rank'],
-            'duration': row['actual_travel_time'],
-            'departure': row['departure_time']
-        })
-    
-    return map_data
-
 
 def export_results_to_excel(analysis_df: pd.DataFrame, summary_metrics: Dict, 
                             output_path: str = "resultados_analisis.xlsx"):
@@ -420,16 +384,15 @@ def export_results_to_excel(analysis_df: pd.DataFrame, summary_metrics: Dict,
         summary_df.to_excel(writer, sheet_name='Resumen', index=False)
         
         # Hoja 3: Distribución de deciles
-        decile_dist = create_decile_histogram_data(analysis_df)
+        decile_dist = datos_histograma_tiempo(analysis_df)
         decile_dist.to_excel(writer, sheet_name='Distribucion_Deciles', index=False)
 
 
-
-def run_global_analysis(paired_data: Dict, epsilon: float = 0.1, cant_muestras: int = 10) -> Tuple[pd.DataFrame, Dict]:
+def correr_analisis_general(paired_data: Dict, epsilon: float = 0.1, cant_muestras: int = 10) -> Tuple[pd.DataFrame, Dict]:
     """
     Ejecuta análisis sobre TODAS las instancias y genera métricas globales.
     
-    Returns:
+    devuelve:
         Tuple[DataFrame completo, métricas agregadas globales]
     """
     all_results = []
@@ -438,7 +401,7 @@ def run_global_analysis(paired_data: Dict, epsilon: float = 0.1, cant_muestras: 
     for instance_name, data in paired_data.items():
         try:
             # Ejecutar análisis por instancia
-            instance_df = run_full_analysis(
+            instance_df = correr_analisis_instancia(
                 instance_name=instance_name,
                 instance_data=data['instance'],
                 solution_data=data['solution'],
@@ -457,24 +420,24 @@ def run_global_analysis(paired_data: Dict, epsilon: float = 0.1, cant_muestras: 
             all_results.append(instance_df)
             
             # Calcular resumen por instancia
-            instance_summary = get_summary_metrics(instance_df)
+            instance_summary = resumen_metricas(instance_df)
             instance_summary['instance_name'] = instance_name
             instance_summary['instance_type'] = tipo
             instance_summaries.append(instance_summary)
             
         except Exception as e:
-            print(f"⚠️ Error procesando {instance_name}: {str(e)}")
+            print(f"Error procesando {instance_name}: {str(e)}")
             continue
     
     # Combinar todos los resultados
     global_df = pd.concat(all_results, ignore_index=True) if all_results else pd.DataFrame()
     
     # Métricas globales agregadas
-    global_metrics = _calculate_global_metrics(global_df, instance_summaries)
+    global_metrics = _calcular_metricas_generales(global_df, instance_summaries)
     
     return global_df, global_metrics
 
-def _calculate_global_metrics(global_df: pd.DataFrame, instance_summaries: List[Dict]) -> Dict:
+def _calcular_metricas_generales(global_df: pd.DataFrame, instance_summaries: List[Dict]) -> Dict:
     """Calcula métricas agregadas a nivel global"""
     if global_df.empty:
         return {}
@@ -504,7 +467,7 @@ def _calculate_global_metrics(global_df: pd.DataFrame, instance_summaries: List[
         'instance_summaries': instance_summaries
     }
 
-def create_global_comparison_data(global_df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
+def datos_comparacion_general(global_df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
     """Prepara datos para gráficos comparativos globales"""
     
     # 1. Deciles por tipo de instancia
@@ -545,7 +508,7 @@ def create_global_comparison_data(global_df: pd.DataFrame) -> Dict[str, pd.DataF
         'ratios_by_type': ratios_by_type
     }
 
-def export_global_analysis_excel(global_df: pd.DataFrame, global_metrics: Dict, 
+def export_general_analysis_excel(global_df: pd.DataFrame, global_metrics: Dict, 
                                 comparison_data: Dict, output_path: str = "analisis_global_completo.xlsx"):
     """Exporta análisis global completo a Excel"""
     with pd.ExcelWriter(output_path, engine='openpyxl') as writer:

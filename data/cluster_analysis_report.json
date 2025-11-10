@@ -1,0 +1,4706 @@
+[
+  {
+    "instance": "C101_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C102_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C103_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C104_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C105_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C106_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C107_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C108_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C109_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 172.29577464788733,
+      "2": 199.859437751004,
+      "0": 189.375
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R101_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R102_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R103_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R104_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R105_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R106_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R107_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R108_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R109_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R110_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R111_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R112_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC101_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC102_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC103_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC104_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC105_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC106_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC107_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC108_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C201_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C202_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C203_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C204_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C205_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C206_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C207_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C208_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 236.2018779342723,
+      "2": 241.00401606425703,
+      "0": 230.10416666666666
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R201_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R202_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R203_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R204_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R205_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R206_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R207_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R208_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R209_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R210_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R211_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 340.5023474178404,
+      "2": 338.69879518072287,
+      "0": 310.0625
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC201_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC202_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC203_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC204_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC205_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC206_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC207_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC208_25",
+    "vertex_count": 27,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 213,
+      "2": 249,
+      "0": 240
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 391.48826291079814,
+      "2": 415.5301204819277,
+      "0": 361.525
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C101_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C102_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C103_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C104_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C105_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C106_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C107_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C108_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C109_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 259.8788209606987,
+      "2": 270.82276995305165,
+      "0": 259.11538461538464
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R101_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R102_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R103_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R104_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R105_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R106_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R107_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R108_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R109_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R110_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R111_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R112_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC101_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC102_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC103_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC104_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC105_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC106_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC107_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC108_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C201_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C202_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C203_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C204_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C205_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C206_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C207_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C208_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 298.91157205240177,
+      "2": 312.49530516431923,
+      "0": 300.7613122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R201_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R202_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R203_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R204_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R205_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R206_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R207_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R208_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R209_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R210_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R211_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 352.9410480349345,
+      "2": 356.8098591549296,
+      "0": 350.0113122171946
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC201_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC202_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC203_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC204_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC205_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC206_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC207_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC208_50",
+    "vertex_count": 52,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 916,
+      "2": 852,
+      "0": 884
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 528.9235807860262,
+      "2": 524.3086854460093,
+      "0": 493.38574660633486
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C101_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C102_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C103_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C104_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C105_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C106_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C107_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C108_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C109_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 389.1520231213873,
+      "2": 398.0322394933794,
+      "0": 389.20546318289786
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      12360.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R101_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R102_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R103_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R104_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R105_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R106_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R107_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R108_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R109_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R110_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R111_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R112_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2300.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC101_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC102_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC103_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC104_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC105_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC106_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC107_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC108_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      2400.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C201_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C202_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C203_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C204_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C205_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C206_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C207_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "C208_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 397.77254335260113,
+      "2": 409.64075993091535,
+      "0": 395.9130047505938
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      33900.0
+    ],
+    "service_times_sample": [
+      0.0,
+      900.0,
+      900.0,
+      900.0,
+      900.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R201_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R202_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R203_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R204_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R205_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R206_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R207_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R208_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R209_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R210_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "R211_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 339.47196531791906,
+      "2": 337.587219343696,
+      "0": 334.69744655581945
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      10000.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC201_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC202_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC203_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC204_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC205_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC206_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC207_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  },
+  {
+    "instance": "RC208_100",
+    "vertex_count": 102,
+    "cluster_count": 3,
+    "arc_counts": {
+      "1": 3460,
+      "2": 3474,
+      "0": 3368
+    },
+    "avg_arc_length_by_cluster": {
+      "1": 447.69075144508673,
+      "2": 445.1649395509499,
+      "0": 440.7853325415677
+    },
+    "cluster_spatial_summary": {},
+    "time_horizon": [
+      0.0,
+      9600.0
+    ],
+    "service_times_sample": [
+      0.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "debug": null
+  }
+]
