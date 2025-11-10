@@ -586,13 +586,6 @@ elif page == "Análisis Global":
                 delta="Deciles 0-2"
             )
             
-        with col_g5:
-            st.metric(
-                "Decil Promedio Global",
-                f"{global_metrics['global_avg_decile']:.2f}",
-                delta=f"Dist: {global_metrics['global_avg_decile_dist']:.2f}"
-            )
-        
         # ============= VALIDACIÓN DE HIPÓTESIS GLOBAL =============
         st.subheader("🎯 Validación de Hipótesis - Nivel Global")
         
@@ -656,8 +649,6 @@ elif page == "Análisis Global":
                 '% Óptimos (Distancia)': f"{data['optimal_arcs_pct_dist']:.1f}%",
                 'Decil Promedio (Tiempo)': f"{data['avg_decile']:.2f}",
                 'Decil Promedio (Distancia)': f"{data['avg_decile_dist']:.2f}",
-                '% Cerca Mínimo': f"{data['near_min_pct']:.1f}%",
-                '% Arcos Cortos': f"{data['short_arcs_pct']:.1f}%"
             }
             for tipo, data in global_metrics['by_instance_type'].items()
         ])

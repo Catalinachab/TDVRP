@@ -424,6 +424,7 @@ def export_results_to_excel(analysis_df: pd.DataFrame, summary_metrics: Dict,
         decile_dist.to_excel(writer, sheet_name='Distribucion_Deciles', index=False)
 
 
+
 def run_global_analysis(paired_data: Dict, epsilon: float = 0.1, cant_muestras: int = 10) -> Tuple[pd.DataFrame, Dict]:
     """
     Ejecuta análisis sobre TODAS las instancias y genera métricas globales.
@@ -488,8 +489,7 @@ def _calculate_global_metrics(global_df: pd.DataFrame, instance_summaries: List[
             'optimal_arcs_pct_dist': (type_df['decile_rank_distance'] <= 2).sum() / len(type_df) * 100,
             'avg_decile': type_df['decile_rank'].mean(),
             'avg_decile_dist': type_df['decile_rank_distance'].mean(),
-            'near_min_pct': (type_df['proximity_category'] == 'mas cerca del min').sum() / len(type_df) * 100,
-            'short_arcs_pct': (type_df['longitud arco'] == 'mas cerca de la min dist').sum() / len(type_df) * 100,
+    
         }
     
     return {
@@ -520,7 +520,7 @@ def create_global_comparison_data(global_df: pd.DataFrame) -> Dict[str, pd.DataF
         'decile_rank': ['mean', 'std'],
         'decile_rank_distance': ['mean', 'std'],
         'proximity_category': lambda x: (x == 'mas cerca del min').sum() / len(x) * 100,
-        'longitud arco': lambda x: (x == 'mas cerca de la min dist').sum() / len(x) * 100,
+        'longitud arco': lambda x: (x == 'arco corto').sum() / len(x) * 100,
         'route_idx': 'nunique',
         'actual_travel_time': 'sum'
     }).round(2)
