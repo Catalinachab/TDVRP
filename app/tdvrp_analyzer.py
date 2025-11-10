@@ -422,3 +422,166 @@ def export_results_to_excel(analysis_df: pd.DataFrame, summary_metrics: Dict,
         # Hoja 3: Distribución de deciles
         decile_dist = create_decile_histogram_data(analysis_df)
         decile_dist.to_excel(writer, sheet_name='Distribucion_Deciles', index=False)
+
+
+def run_global_analysis(paired_data: Dict, epsilon: float = 0.1, cant_muestras: int = 10) -> Tuple[pd.DataFrame, Dict]:
+    """
+    Ejecuta análisis sobre TODAS las instancias y genera métricas globales.
+    
+    Returns:
+        Tuple[DataFrame completo, métricas agregadas globales]
+    """
+    all_results = []
+    instance_summaries = []
+    
+    for instance_name, data in paired_data.items():
+        try:
+            # Ejecutar análisis por instancia
+            instance_df = run_full_analysis(
+                instance_name=instance_name,
+                instance_data=data['instance'],
+                solution_data=data['solution'],
+                epsilon=epsilon,
+                cant_muestras=cant_muestras
+            )
+            
+            # Agregar columna de instancia
+            instance_df['instance_name'] = instance_name
+            
+            # Determinar tipo de instancia
+            tipo = "RC" if instance_name.startswith("RC") else instance_name[0]
+            instance_df['instance_type'] = tipo
+            
+            # Agregar a resultados globales
+            all_results.append(instance_df)
+            
+            # Calcular resumen por instancia
+            instance_summary = get_summary_metrics(instance_df)
+            instance_summary['instance_name'] = instance_name
+            instance_summary['instance_type'] = tipo
+            instance_summaries.append(instance_summary)
+            
+        except Exception as e:
+            print(f"⚠️ Error procesando {instance_name}: {str(e)}")
+            continue
+    
+    # Combinar todos los resultados
+    global_df = pd.concat(all_results, ignore_index=True) if all_results else pd.DataFrame()
+    
+    # Métricas globales agregadas
+    global_metrics = _calculate_global_metrics(global_df, instance_summaries)
+    
+    return global_df, global_metrics
+
+def _calculate_global_metrics(global_df: pd.DataFrame, instance_summaries: List[Dict]) -> Dict:
+    """Calcula métricas agregadas a nivel global"""
+    if global_df.empty:
+        return {}
+    
+    # Métricas por tipo de instancia
+    by_type = {}
+    for inst_type in global_df['instance_type'].unique():
+        type_df = global_df[global_df['instance_type'] == inst_type]
+        by_type[inst_type] = {
+            'total_arcs': len(type_df),
+            'optimal_arcs_pct': (type_df['decile_rank'] <= 2).sum() / len(type_df) * 100,
+            'optimal_arcs_pct_dist': (type_df['decile_rank_distance'] <= 2).sum() / len(type_df) * 100,
+            'avg_decile': type_df['decile_rank'].mean(),
+            'avg_decile_dist': type_df['decile_rank_distance'].mean(),
+            'near_min_pct': (type_df['proximity_category'] == 'mas cerca del min').sum() / len(type_df) * 100,
+            'short_arcs_pct': (type_df['longitud arco'] == 'mas cerca de la min dist').sum() / len(type_df) * 100,
+        }
+    
+    return {
+        'total_instances': len(set(global_df['instance_name'])),
+        'total_arcs': len(global_df),
+        'total_routes': global_df['route_idx'].nunique(),
+        'global_optimal_pct': (global_df['decile_rank'] <= 2).sum() / len(global_df) * 100,
+        'global_optimal_pct_dist': (global_df['decile_rank_distance'] <= 2).sum() / len(global_df) * 100,
+        'global_avg_decile': global_df['decile_rank'].mean(),
+        'global_avg_decile_dist': global_df['decile_rank_distance'].mean(),
+        'by_instance_type': by_type,
+        'instance_summaries': instance_summaries
+    }
+
+def create_global_comparison_data(global_df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
+    """Prepara datos para gráficos comparativos globales"""
+    
+    # 1. Deciles por tipo de instancia
+    deciles_by_type = global_df.groupby(['instance_type', 'decile_rank']).size().reset_index(name='count')
+    deciles_by_type['percentage'] = deciles_by_type.groupby('instance_type')['count'].transform(lambda x: x / x.sum() * 100)
+    
+    # 2. Deciles de distancia por tipo
+    deciles_dist_by_type = global_df.groupby(['instance_type', 'decile_rank_distance']).size().reset_index(name='count')
+    deciles_dist_by_type['percentage'] = deciles_dist_by_type.groupby('instance_type')['count'].transform(lambda x: x / x.sum() * 100)
+    
+    # 3. Resumen por instancia individual
+    instance_summary = global_df.groupby('instance_name').agg({
+        'decile_rank': ['mean', 'std'],
+        'decile_rank_distance': ['mean', 'std'],
+        'proximity_category': lambda x: (x == 'mas cerca del min').sum() / len(x) * 100,
+        'longitud arco': lambda x: (x == 'mas cerca de la min dist').sum() / len(x) * 100,
+        'route_idx': 'nunique',
+        'actual_travel_time': 'sum'
+    }).round(2)
+    
+    instance_summary.columns = ['avg_decile_time', 'std_decile_time', 'avg_decile_dist', 'std_decile_dist', 
+                               'near_min_pct', 'short_arcs_pct', 'num_routes', 'total_time']
+    instance_summary = instance_summary.reset_index()
+    
+    # 4. Comparación de ratios por tipo
+    ratios_by_type = global_df.groupby('instance_type').agg({
+        'ratio_to_min': 'mean',
+        'ratio_to_max': 'mean',
+        'ratio_to_min_dist': 'mean',
+        'ratio_to_max_dist': 'mean',
+        'num_feasible_arcs': 'mean'
+    }).round(3).reset_index()
+    
+    return {
+        'deciles_by_type': deciles_by_type,
+        'deciles_dist_by_type': deciles_dist_by_type,
+        'instance_summary': instance_summary,
+        'ratios_by_type': ratios_by_type
+    }
+
+def export_global_analysis_excel(global_df: pd.DataFrame, global_metrics: Dict, 
+                                comparison_data: Dict, output_path: str = "analisis_global_completo.xlsx"):
+    """Exporta análisis global completo a Excel"""
+    with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+        # Hoja 1: Datos completos de todos los arcos
+        global_df.to_excel(writer, sheet_name='Todos_los_Arcos', index=False)
+        
+        # Hoja 2: Resumen global
+        global_summary_df = pd.DataFrame([{
+            'Total_Instancias': global_metrics['total_instances'],
+            'Total_Arcos': global_metrics['total_arcs'],
+            'Total_Rutas': global_metrics['total_routes'],
+            'Pct_Optimos_Tiempo': global_metrics['global_optimal_pct'],
+            'Pct_Optimos_Distancia': global_metrics['global_optimal_pct_dist'],
+            'Decil_Promedio_Tiempo': global_metrics['global_avg_decile'],
+            'Decil_Promedio_Distancia': global_metrics['global_avg_decile_dist']
+        }])
+        global_summary_df.to_excel(writer, sheet_name='Resumen_Global', index=False)
+        
+        # Hoja 3: Resumen por tipo de instancia
+        type_summary_list = []
+        for inst_type, metrics in global_metrics['by_instance_type'].items():
+            type_summary_list.append({
+                'Tipo_Instancia': inst_type,
+                **metrics
+            })
+        type_summary_df = pd.DataFrame(type_summary_list)
+        type_summary_df.to_excel(writer, sheet_name='Resumen_por_Tipo', index=False)
+        
+        # Hoja 4: Resumen por instancia individual
+        comparison_data['instance_summary'].to_excel(writer, sheet_name='Resumen_por_Instancia', index=False)
+        
+        # Hoja 5: Distribución de deciles por tipo
+        comparison_data['deciles_by_type'].to_excel(writer, sheet_name='Deciles_por_Tipo', index=False)
+        
+        # Hoja 6: Distribución de deciles de distancia por tipo
+        comparison_data['deciles_dist_by_type'].to_excel(writer, sheet_name='Deciles_Dist_por_Tipo', index=False)
+        
+        # Hoja 7: Ratios por tipo
+        comparison_data['ratios_by_type'].to_excel(writer, sheet_name='Ratios_por_Tipo', index=False)
